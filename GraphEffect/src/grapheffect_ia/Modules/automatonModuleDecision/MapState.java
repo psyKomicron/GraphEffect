@@ -26,10 +26,9 @@ public class MapState extends State {
 	@Override
 	public State transition() {
 		State transition = null;
-		if(this.getMemoryModule().hasBase()) {
+		if(!(this.getMemoryModule().hasBase())) {
 			transition = new BaseState(getDecisionModule());
-		}
-		else transition = new NeedSpaceshipState(getDecisionModule());
+		} else transition = new NeedSpaceshipState(getDecisionModule());
 		return transition;
 	}
 

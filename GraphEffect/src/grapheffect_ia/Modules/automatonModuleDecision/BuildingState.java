@@ -10,7 +10,6 @@ public class BuildingState extends State {
 
 	public BuildingState(Module_Decision moduleDecision) {
 		super(moduleDecision);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -18,7 +17,7 @@ public class BuildingState extends State {
 	 */
 	@Override
 	public String messageToSend() {
-		return "BUILD|Explorer";
+		return "BUILDSHIP|Explorer";
 	}
 
 	/**
