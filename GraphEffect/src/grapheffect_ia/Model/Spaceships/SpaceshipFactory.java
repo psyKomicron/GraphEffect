@@ -4,6 +4,7 @@
 package grapheffect_ia.Model.Spaceships;
 
 import grapheffect_ia.Model.Map.Coordinate;
+import grapheffect_ia.Model.Map.Map;
 
 /**
  * @author julie
@@ -19,24 +20,25 @@ public class SpaceshipFactory {
 	 * @return SpaceShip The spaceship created
 	 * @throws NullPointerException
 	 */
-	public static Spaceship createSpaceship(TypeSpaceship arg, Coordinate base, String name) throws NullPointerException {
+	public static Spaceship createSpaceship(TypeSpaceship arg, Coordinate base, Map map) throws NullPointerException {
 		Spaceship spaceship = null;
 		switch(arg) {
 		case EXPLORER :
-			spaceship = new ExplorerSpaceship(base, name);
+			spaceship = new ExplorerSpaceship(base, TypeSpaceship.EXPLORER.label);
 			break;
 		case CONSTRUCTOR :
-			spaceship = new ConstructorSpaceship(base, name);
+			spaceship = new ConstructorSpaceship(base, TypeSpaceship.CONSTRUCTOR.label);
 			break;
 		case TRANSPORTER :
-			spaceship = new TransporterSpaceship(base, name);
+			spaceship = new TransporterSpaceship(base, TypeSpaceship.TRANSPORTER.label);
 			break;
 		case FIGHTER :
-			spaceship = new FighterSpaceship(base, name);
+			spaceship = new FighterSpaceship(base, TypeSpaceship.FIGHTER.label);
 			break;
 		default :
 			throw new NullPointerException("\n default case on : \n\tSpaceShipFactory.createSpaceShip");
 		}
+		spaceship.setMap(map);
 		return spaceship;
 	}
 }

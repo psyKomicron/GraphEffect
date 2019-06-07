@@ -44,16 +44,16 @@ public class Module_Memory extends Module  {
     public void addSpaceShips(String name) {
     	switch(name) {
     	case "Explorer" :
-			this._spaceships.add(SpaceshipFactory.createSpaceship(TypeSpaceship.EXPLORER, this._coordinateBase, name));
+			this._spaceships.add(SpaceshipFactory.createSpaceship(TypeSpaceship.EXPLORER, this._coordinateBase, _map));
     		break;
     	case "Constructor" :
-    		this._spaceships.add(SpaceshipFactory.createSpaceship(TypeSpaceship.CONSTRUCTOR, this._coordinateBase, name));
+    		this._spaceships.add(SpaceshipFactory.createSpaceship(TypeSpaceship.CONSTRUCTOR, this._coordinateBase, _map));
     		break;
     	case "Fighter" :
-    		this._spaceships.add(SpaceshipFactory.createSpaceship(TypeSpaceship.FIGHTER, this._coordinateBase, name));
+    		this._spaceships.add(SpaceshipFactory.createSpaceship(TypeSpaceship.FIGHTER, this._coordinateBase, _map));
     		break;
     	case "Transporter" :
-    		this._spaceships.add(SpaceshipFactory.createSpaceship(TypeSpaceship.TRANSPORTER, this._coordinateBase, name));
+    		this._spaceships.add(SpaceshipFactory.createSpaceship(TypeSpaceship.TRANSPORTER, this._coordinateBase, _map));
     		break;
     	default :
     		System.err.println("default case on Module_Memory.addSpaceShip ("+name+")");
