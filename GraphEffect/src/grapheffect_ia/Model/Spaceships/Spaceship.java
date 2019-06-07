@@ -135,6 +135,7 @@ public abstract class Spaceship {
 	
 	public boolean needUpdatedMap() {
 		boolean needUpdatedMap = false;
+		System.out.println(_map); // _map == null : true
 		for(Hexagon hexagon : _map.getHexagon(_position).getNeighbours()) {
 			for(Hexagon n : _map.getHexagon(hexagon.getCoordinate()).getNeighbours()) {
 				if(n.getType() == TypeHexagon.UNKNOW) {

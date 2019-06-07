@@ -33,6 +33,7 @@ public class MovingState extends State {
 	@Override
 	public State transition() {
 		State transition = null;
+		// setting the map for all spaceships
 		if(this.getMemoryModule().getSpaceShips().get(0).getOrder() != null) {
 			this.getMemoryModule().getSpaceShips().get(0).doOrder();
 		}
