@@ -135,10 +135,12 @@ public abstract class Spaceship {
 	
 	public boolean needUpdatedMap() {
 		boolean needUpdatedMap = false;
-		System.out.println(_map); // _map == null : true
-		for(Hexagon hexagon : _map.getHexagon(_position).getNeighbours()) {
-			for(Hexagon n : _map.getHexagon(hexagon.getCoordinate()).getNeighbours()) {
-				if(n.getType() == TypeHexagon.UNKNOW) {
+		if(_map == null) {
+			throw new NullPointerException("Map has not been instantiated");
+		}
+		for(Hexagon hex1 : _map.getHexagon(_position).getNeighbours()) {
+			for(Hexagon hex2 : _map.getHexagon(hex1.getCoordinate()).getNeighbours()) {
+				if(hex2.getType() == TypeHexagon.UNKNOW) {
 					needUpdatedMap = true;
 				}
 			}
@@ -159,7 +161,7 @@ public abstract class Spaceship {
 	public abstract void resetAp();
 
 	/**
-	 * Used to get the right name of the spaceship (look at the NetworkProtocol.pdf file). But for now it does not work :(
+	 * Used to get the right name of the spaceship (look at the NetworkProtocol.pdf file). Used by generateName().
 	 * @return number of instances of the spaceship's type
 	 */
 	public abstract int getCount();

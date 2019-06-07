@@ -18,7 +18,7 @@ public class SpaceshipFactory {
 	 * @param base Where the ship has been created
 	 * @param name Name of the spaceship
 	 * @return SpaceShip The spaceship created
-	 * @throws NullPointerException
+	 * @throws NullPointerException if the arg value does'n match any TypeSpaceship values
 	 */
 	public static Spaceship createSpaceship(TypeSpaceship arg, Coordinate base, Map map) throws NullPointerException {
 		Spaceship spaceship = null;

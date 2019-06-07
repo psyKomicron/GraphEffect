@@ -38,7 +38,7 @@ public class MovingState extends State {
 			this.getMemoryModule().getSpaceShips().get(0).doOrder();
 		}
 		if(this.getMemoryModule().getSpaceShips().get(0).needUpdatedMap()) {
-			this.getMemoryModule().updateMap(true);
+			this.getMemoryModule().updateMap(false);
 			transition = new MapState(getDecisionModule());
 		} else transition = new ManageSpaceshipState(this.getDecisionModule());
 		return transition;

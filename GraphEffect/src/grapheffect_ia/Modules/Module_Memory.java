@@ -71,7 +71,7 @@ public class Module_Memory extends Module  {
      */
     public void generateMap(String messageReceived) {
     	_map = new Map(messageReceived);
-        _mapUpToDate = false;
+        _mapUpToDate = true;
         for(Spaceship spaceship : _spaceships) {
         	spaceship.setMap(_map);
         }
@@ -97,19 +97,19 @@ public class Module_Memory extends Module  {
     	return this._mapUpToDate;
     }
     
-    public void updateMap(boolean b) {
-    	_mapUpToDate = b;
-    	if(b == false) {
-    		for(Spaceship spaceship : _spaceships) {
-    			spaceship.clearOrders();
-    		}
+    public void updateMap(boolean upToDate) {
+    	_mapUpToDate = upToDate;
+    	if(upToDate == false) {
+			for(Spaceship spaceship : _spaceships) {
+				spaceship.clearOrders();
+			}
     	}
     }
     
     /**
      * <p>Translates the response of the server to the BASE command.</p>
      * <p>Splits the string parameter on ',' and cast the value to Integer</p>
-     * @param message string sent back by the server (like X,Y ; X,Y integer)
+     * @param message string sent back by the server (like X,Y ; X,Y being integers)
      * @return Coordinate created from the two parts of the string
      */
     public static Coordinate fromString(String message) {

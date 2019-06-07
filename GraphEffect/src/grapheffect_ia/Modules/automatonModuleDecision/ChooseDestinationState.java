@@ -12,7 +12,6 @@ public class ChooseDestinationState extends State {
 
 	public ChooseDestinationState(Module_Decision moduleDecision) {
 		super(moduleDecision);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
