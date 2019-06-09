@@ -25,7 +25,6 @@ public class Coordinate {
         return line;
     }
   
-    
     public int getColumn() {
         return column;
     }
@@ -38,8 +37,7 @@ public class Coordinate {
         hash = 11 * hash + this.column;
         return hash;
     }
-
-    
+  
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -64,18 +62,18 @@ public class Coordinate {
     
     @Override
     public String toString() {  	
-    	return " "+this.column+"|"+this.line+" ";
+    	return " "+this.column+", "+this.line+" ";
     }
     
     
     /**
      * Calculates the new coordinate when a movement has been made on the map.
-     * e.g. a ship moves TOP, then the new coordinates are (x, y-1).
+     * e.g. a ship moves TOP, then the new coordinates are (x-1, y).
      * @param movement movement that the ship will do.
      * @return Coordinate new coordinates according to the movement that the ship has made.
      */
     public Coordinate neighbour(TypeMovement movement) {
-    	Coordinate coordinate =null;
+    	Coordinate coordinate = null;
     	int j = this.column;
     	int i = this.line;
     	if(j%2 == 0) {

@@ -3,6 +3,7 @@
  */
 package grapheffect_ia.Modules.automatonModuleDecision;
 
+import grapheffect_ia.AI;
 import grapheffect_ia.Modules.Module_Decision;
 
 /**
@@ -11,9 +12,8 @@ import grapheffect_ia.Modules.Module_Decision;
  */
 public class ManageSpaceshipState extends State {
 
-	public ManageSpaceshipState(Module_Decision moduleDecision) {
-		super(moduleDecision);
-		// TODO Auto-generated constructor stub
+	public ManageSpaceshipState(AI ai) {
+		super(ai);
 	}
 
 	/**
@@ -31,13 +31,13 @@ public class ManageSpaceshipState extends State {
 	public State transition() {
 		State transition = null;
 		if(this.getMemoryModule().getSpaceShips().get(0).getAp() < 1) {
-			transition = new EndTurnState(getDecisionModule());
+			transition = new EndTurnState(getAi());
 		}
 		else if(this.getMemoryModule().getSpaceShips().get(0).getAp() < 1 && this.getMemoryModule().getSpaceShips().get(0).getOrder() != null) {
-			transition = new MovingState(getDecisionModule());
+			transition = new MovingState(getAi());
 		}
 		else {
-			transition = new ChooseDestinationState(getDecisionModule());
+			transition = new ChooseDestinationState(getAi());
 		}
 		return transition;
 	}

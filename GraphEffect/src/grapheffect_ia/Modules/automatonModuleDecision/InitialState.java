@@ -3,7 +3,7 @@
  */
 package grapheffect_ia.Modules.automatonModuleDecision;
 
-import grapheffect_ia.Modules.Module_Decision;
+import grapheffect_ia.AI;
 
 /**
  * @author julie
@@ -11,8 +11,8 @@ import grapheffect_ia.Modules.Module_Decision;
  */
 public class InitialState extends State {
 
-	public InitialState(Module_Decision moduleDecision) {
-		super(moduleDecision);
+	public InitialState(AI ai) {
+		super(ai);
 	}
 
 	/**
@@ -28,7 +28,7 @@ public class InitialState extends State {
 	 */
 	@Override
 	public State transition() {
-		return new MapState(getDecisionModule());
+		return new MapState(getAi());
 	}
 
 	

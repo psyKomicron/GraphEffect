@@ -3,7 +3,7 @@
  */
 package grapheffect_ia.Modules.automatonModuleDecision;
 
-import grapheffect_ia.Modules.Module_Decision;
+import grapheffect_ia.AI;
 
 /**
  * @author julie
@@ -11,8 +11,8 @@ import grapheffect_ia.Modules.Module_Decision;
  */
 public class MovingState extends State {
 
-	public MovingState(Module_Decision moduleDecision) {
-		super(moduleDecision);
+	public MovingState(AI ai) {
+		super(ai);
 	}
 
 	/**
@@ -39,8 +39,8 @@ public class MovingState extends State {
 		}
 		if(this.getMemoryModule().getSpaceShips().get(0).needUpdatedMap()) {
 			this.getMemoryModule().updateMap(false);
-			transition = new MapState(getDecisionModule());
-		} else transition = new ManageSpaceshipState(this.getDecisionModule());
+			transition = new MapState(getAi());
+		} else transition = new ManageSpaceshipState(getAi());
 		return transition;
 	}
 

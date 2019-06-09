@@ -23,9 +23,16 @@ public abstract class Hexagon {
         coordinate = coord;
     }
     
-    
     public Coordinate getCoordinate() {
         return this.coordinate;
+    }
+    
+    public ArrayList<Hexagon> getNeighbours() {
+    	return this.neighbours;
+    }
+    
+    public void addNeighbours(Hexagon neighbour) {
+    	this.neighbours.add(neighbour);
     }
     
     /**
@@ -34,16 +41,5 @@ public abstract class Hexagon {
      */
     public abstract TypeHexagon getType();
     
-    
     public abstract boolean isAccessible();
-    
-    
-    public ArrayList<Hexagon> getNeighbours() {
-    	return this.neighbours;
-    }
-    
-    
-    public void addNeighbours(Hexagon neighbour) {
-    	this.neighbours.add(neighbour);
-    }
 }

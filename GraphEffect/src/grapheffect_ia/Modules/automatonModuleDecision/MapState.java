@@ -1,6 +1,6 @@
 package grapheffect_ia.Modules.automatonModuleDecision;
 
-import grapheffect_ia.Modules.Module_Decision;
+import grapheffect_ia.AI;
 
 /**
  * @author julie
@@ -8,8 +8,8 @@ import grapheffect_ia.Modules.Module_Decision;
  */
 public class MapState extends State {
 
-	public MapState(Module_Decision moduleDecision) {
-		super(moduleDecision);
+	public MapState(AI ai) {
+		super(ai);
 	}
 
 	/**
@@ -27,8 +27,8 @@ public class MapState extends State {
 	public State transition() {
 		State transition = null;
 		if(!(this.getMemoryModule().hasBase())) {
-			transition = new BaseState(getDecisionModule());
-		} else transition = new NeedSpaceshipState(getDecisionModule());
+			transition = new BaseState(getAi());
+		} else transition = new NeedSpaceshipState(getAi());
 		return transition;
 	}
 

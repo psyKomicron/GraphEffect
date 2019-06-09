@@ -3,6 +3,7 @@
  */
 package grapheffect_ia.Modules.automatonModuleDecision;
 
+import grapheffect_ia.AI;
 import grapheffect_ia.Modules.Module_Decision;
 
 /**
@@ -11,8 +12,8 @@ import grapheffect_ia.Modules.Module_Decision;
  */
 public class EndTurnState extends State {
 
-	public EndTurnState(Module_Decision moduleDecision) {
-		super(moduleDecision);
+	public EndTurnState(AI ai) {
+		super(ai);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -29,7 +30,7 @@ public class EndTurnState extends State {
 	 */
 	@Override
 	public State transition() {
-		return new ManageSpaceshipState(getDecisionModule());
+		return new ManageSpaceshipState(getAi());
 	}
 
 }
