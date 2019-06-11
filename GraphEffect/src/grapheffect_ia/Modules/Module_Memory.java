@@ -158,4 +158,13 @@ public class Module_Memory extends Module  {
     	return b;
     }
     
+    public boolean isCoordinateFree(Coordinate c) {
+    	boolean isFree = true;
+    	for(Spaceship spaceship : _spaceships) {
+    		if(spaceship.getPosition() == c) {
+    			isFree = false;
+    		}
+    	}
+    	return isFree;
+    }
 }

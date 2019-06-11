@@ -30,7 +30,7 @@ public class EndTurnState extends State {
 	 */
 	@Override
 	public State transition() {
-		return new ManageSpaceshipState(getAi());
+		return new ManageSpaceshipsState(getAi());
 	}
 
 }

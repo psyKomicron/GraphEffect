@@ -40,7 +40,7 @@ public class MovingState extends State {
 		if(this.getMemoryModule().getSpaceShips().get(0).needUpdatedMap()) {
 			this.getMemoryModule().updateMap(false);
 			transition = new MapState(getAi());
-		} else transition = new ManageSpaceshipState(getAi());
+		} else transition = new ManageSpaceshipsState(getAi());
 		return transition;
 	}
 
