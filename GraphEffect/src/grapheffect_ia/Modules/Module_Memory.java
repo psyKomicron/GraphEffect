@@ -19,6 +19,7 @@ public class Module_Memory extends Module  {
     private Coordinate _coordinateBase;
     private Map _map;
     private boolean _mapUpToDate;
+    private int _numCurrentShip;
 	
     /**
      * <p>
@@ -29,6 +30,7 @@ public class Module_Memory extends Module  {
     public Module_Memory(AI ai) {
         super(ai);
         _spaceships = new ArrayList<>();
+       _numCurrentShip = 0;
     }
     
     /**
@@ -38,6 +40,40 @@ public class Module_Memory extends Module  {
     public ArrayList<Spaceship> getSpaceShips() {
 		return _spaceships;
 	}
+    
+    /**
+     * Getter for Map._map.
+     * @return Map _map attribute
+     */
+    public Map getMap() {
+    	return this._map;
+    }
+    
+    /**
+     * <p>
+     * Uses the fromString {@link grapheffect_ia.Modules.Module_Memory#fromString(String message)} static method to set the base for the game.
+     * </p> 
+     * @param message String sent by the server when asked for BASE command
+     */
+    public void setBase(String message) {
+    	this._coordinateBase = Module_Memory.fromString(message);
+    }
+    
+    public Coordinate getBase() {
+    	return this._coordinateBase;
+    }
+    
+    public Hexagon getBaseHexagon() {
+    	return _map.getHexagon(_coordinateBase);
+    }
+    
+    public Spaceship getCurrentSpaceship() {
+    	return _spaceships.get(_numCurrentShip);
+    }
+    
+    public void nextShip() {
+    	_numCurrentShip = _numCurrentShip%_spaceships.size();
+    }
     
     /**
      * Setter for _space_ships
@@ -77,14 +113,6 @@ public class Module_Memory extends Module  {
     }
     
     /**
-     * Getter for Map._map.
-     * @return Map _map attribute
-     */
-    public Map getMap() {
-    	return this._map;
-    }
-    
-    /**
      * <p>
      * Check if the memory module has stored the map of the game.
      * If not the function raise a NullPointerException which is caught by the method thus returns false.
@@ -114,24 +142,6 @@ public class Module_Memory extends Module  {
     public static Coordinate fromString(String message) {
         String[] translated_message = message.split(",");
         return new Coordinate(Integer.valueOf(translated_message[0]), Integer.valueOf(translated_message[1]));
-    }
-    
-    /**
-     * <p>
-     * Uses the fromString {@link grapheffect_ia.Modules.Module_Memory#fromString(String message)} static method to set the base for the game.
-     * </p> 
-     * @param message String sent by the server when asked for BASE command
-     */
-    public void setBase(String message) {
-    	this._coordinateBase = Module_Memory.fromString(message);
-    }
-    
-    public Coordinate getBase() {
-    	return this._coordinateBase;
-    }
-    
-    public Hexagon getBaseHexagon() {
-    	return _map.getHexagon(_coordinateBase);
     }
     
     /**
