@@ -21,13 +21,13 @@ public class ChooseDestinationState extends State {
 
 	@Override
 	public State transition() {
-		State transition = null;
+		State transition = new MovingState(getAi());
 		Hexagon shipHexagon = getMemoryModule().getMap().getHexagon(getMemoryModule().getSpaceShips().get(0).getPosition());
 		Hexagon baseHexagon = getMemoryModule().getBaseHexagon();
 		ExploringPath ep = new ExploringPath(getMemoryModule().getMap());
 		ep.calculation(shipHexagon, baseHexagon);
 		Hexagon destination = ep.getUnknownHexagonToVisit();
-		
+		ep.getPath(destination);
 		return transition;
 	}
 
