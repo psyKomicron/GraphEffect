@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import grapheffect_ia.AI;
 import grapheffect_ia.Model.Map.Coordinate;
 import grapheffect_ia.Model.Map.Map;
+import grapheffect_ia.Model.Map.Hexagon.Hexagon;
 import grapheffect_ia.Model.Spaceships.SpaceshipFactory;
 import grapheffect_ia.Model.Spaceships.*;
 
@@ -58,10 +59,8 @@ public class Module_Memory extends Module  {
     	default :
     		System.err.println("default case on Module_Memory.addSpaceShip ("+name+")");
     	}
-    	
     }
-    
-    
+      
 	/**
      * <p>
      * Creates a map with {@link Map#Map(String)}. The string used is given by the reaction module after it used the {@link Module_Memory#hasMap()} and
@@ -129,6 +128,10 @@ public class Module_Memory extends Module  {
     
     public Coordinate getBase() {
     	return this._coordinateBase;
+    }
+    
+    public Hexagon getBaseHexagon() {
+    	return _map.getHexagon(_coordinateBase);
     }
     
     /**
