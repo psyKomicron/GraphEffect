@@ -16,6 +16,7 @@ import grapheffect_ia.Model.Map.Hexagon.TypeHexagon;
  */
 public abstract class Spaceship {
 	private Coordinate _position;
+	private Coordinate _goalPosition;
 	private ArrayList<TypeMovement> _orders;
 	private int _ap;
 	private String _name;
@@ -52,6 +53,30 @@ public abstract class Spaceship {
 	public void setName(String name) {
 		_name = name;
 	}
+	
+	/**
+	 * Gets and return the value at the specified index
+	 * @param index, index value to retrieve
+	 * @return TypeMovement, movement at specified index
+	 */
+	public TypeMovement getOrder(int index) {
+		return _orders.get(index);
+	}
+	
+	/**
+	 * <p>Gets and return the first movement from _orders (ArrayList<Movement>)</p>
+	 * @throws IndexOutOfBoundsException if the order array (_order attribute) is empty
+	 * @return TypeMovement, first movement from _orders
+	 */
+	public TypeMovement getOrder() {
+		TypeMovement order;
+		try {
+			order = _orders.get(0);
+		} catch(IndexOutOfBoundsException ioobe) {
+			order = null;
+		}
+		return order;
+	}
 		
 	/**
 	 * _position getter
@@ -77,6 +102,18 @@ public abstract class Spaceship {
 		this._ap = ap;
 	}
 	
+	public void setMap(Map map) {
+		_map = map;
+	}
+	
+	public void setGoalPosition(Coordinate c) {
+		_goalPosition = c;
+	}
+	
+	public Coordinate getGoalPosition() {
+		return _goalPosition;
+	}
+	
 	/**
 	 * Add each movement from variable (list) to the _order attribute (which is an array)
 	 * @param list, array of each type movement for the ship to do
@@ -97,40 +134,12 @@ public abstract class Spaceship {
 		_orders.remove(this.getOrder());
 	}
 	
-	/**
-	 * <p>Gets and return the first movement from _orders (ArrayList<Movement>)</p>
-	 * @throws IndexOutOfBoundsException if the order array (_order attribute) is empty
-	 * @return TypeMovement, first movement from _orders
-	 */
-	public TypeMovement getOrder() {
-		TypeMovement order;
-		try {
-			order = _orders.get(0);
-		} catch(IndexOutOfBoundsException ioobe) {
-			order = null;
-		}
-		return order;
-	}
-	
-	/**
-	 * Gets and return the value at the specified index
-	 * @param index, index value to retrieve
-	 * @return TypeMovement, movement at specified index
-	 */
-	public TypeMovement getOrder(int index) {
-		return _orders.get(index);
-	}
-	
 	public void clearOrders() {
 		_orders.clear();
 	}
 	
 	public String generateName() {
 		return this.getName()+"_"+this.getCount();
-	}
-	
-	public void setMap(Map map) {
-		_map = map;
 	}
 	
 	public boolean needUpdatedMap() throws NullPointerException {

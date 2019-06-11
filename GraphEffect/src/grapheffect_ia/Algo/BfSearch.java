@@ -48,7 +48,6 @@ public class BfSearch {
             }
         }
     }
-
     
     /**
      * Getter for a specific hexagon inside the HashMap _distances attribute.
@@ -112,10 +111,8 @@ public class BfSearch {
     
     public boolean isReachable(Hexagon hexa) {
     	boolean reachable = false;
-    	if(_distances.get(hexa) != null) {
-    		if(_distances.get(hexa) > -1) {
-    			reachable = true;
-    		}
+    	if(_distances.get(hexa) != null && _distances.get(hexa) > -1	) {
+			reachable = true;
     	}
     	return reachable;
     }

@@ -4,7 +4,6 @@
 package grapheffect_ia.Modules.automatonModuleDecision;
 
 import grapheffect_ia.AI;
-import grapheffect_ia.Modules.Module_Decision;
 
 /**
  * @author julie
