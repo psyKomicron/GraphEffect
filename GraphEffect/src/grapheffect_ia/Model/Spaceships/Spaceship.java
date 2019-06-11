@@ -133,7 +133,7 @@ public abstract class Spaceship {
 		_map = map;
 	}
 	
-	public boolean needUpdatedMap() {
+	public boolean needUpdatedMap() throws NullPointerException {
 		boolean needUpdatedMap = false;
 		if(_map == null) {
 			throw new NullPointerException("Map has not been instantiated");
