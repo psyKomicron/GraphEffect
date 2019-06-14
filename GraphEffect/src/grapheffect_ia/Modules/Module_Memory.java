@@ -37,7 +37,7 @@ public class Module_Memory extends Module  {
      * Getter for _space_ships
      * @return Array list _spaceship
      */
-    public ArrayList<Spaceship> getSpaceShips() {
+    public ArrayList<Spaceship> getSpaceship() {
 		return _spaceships;
 	}
     

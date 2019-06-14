@@ -26,7 +26,7 @@ public class NeedSpaceshipState extends State {
 	@Override
 	public State transition() {
 		State transition = null;
-		if(!(this.getMemoryModule().getSpaceShips().isEmpty())) {
+		if(!(this.getMemoryModule().getSpaceship().isEmpty())) {
 			transition = new ManageSpaceshipsState(getAi());
 		} else transition = new BuildingState(getAi());
 		return transition;

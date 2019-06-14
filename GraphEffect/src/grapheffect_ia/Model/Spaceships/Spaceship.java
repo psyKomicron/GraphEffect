@@ -34,7 +34,7 @@ public abstract class Spaceship {
 		_ap = 6;
 		_name = name;
 	}
-
+	
 	/**
 	 * Constructs a spaceship with it's starting coordinates
 	 * @deprecated
