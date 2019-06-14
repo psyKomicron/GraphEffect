@@ -21,6 +21,7 @@ public class ChooseDestinationState extends State {
 
 	@Override
 	public State transition() {
+		/*
 		Hexagon shipHexagon = getMemoryModule().getMap().getHexagon(getMemoryModule().getSpaceship().get(0).getPosition());
 		Hexagon baseHexagon = getMemoryModule().getBaseHexagon();
 		ExploringPath ep = new ExploringPath(getMemoryModule().getMap());
@@ -28,6 +29,15 @@ public class ChooseDestinationState extends State {
 		Hexagon destination = ep.getUnknownHexagonToVisit();
 		getMemoryModule().getSpaceship().get(0).addOrders(ep.getPath(destination));
 		return new MovingState(getAi());
+		*/
+		Hexagon shipHexagon = getMemoryModule().getMap().getHexagon(getMemoryModule().getSpaceship().get(0).getPosition());
+		Hexagon baseHexagon = getMemoryModule().getBaseHexagon();
+		ExploringPath ep = new ExploringPath(getMemoryModule().getMap());
+		ep.calculation(shipHexagon, baseHexagon);
+		Hexagon destination = ep.getUnknownHexagonToVisit();
+		if(destination == null || destination.isAccessible() || destination.equals(shipHexagon)) {
+			
+		}
 	}
 
 }
