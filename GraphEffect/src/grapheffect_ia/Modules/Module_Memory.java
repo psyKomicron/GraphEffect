@@ -37,7 +37,7 @@ public class Module_Memory extends Module  {
      * Getter for _space_ships
      * @return Array list _spaceship
      */
-    public ArrayList<Spaceship> getSpaceship() {
+    public ArrayList<Spaceship> getSpaceships() {
 		return _spaceships;
 	}
     
@@ -78,7 +78,7 @@ public class Module_Memory extends Module  {
     /**
      * Setter for _space_ships
      */
-    public void addSpaceShips(String name) {
+    public void addSpaceships(String name) {
     	switch(name) {
     	case "Explorer" :
 			this._spaceships.add(SpaceshipFactory.createSpaceship(TypeSpaceship.EXPLORER, this._coordinateBase, _map));

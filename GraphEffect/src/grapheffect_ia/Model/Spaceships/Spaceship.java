@@ -65,7 +65,6 @@ public abstract class Spaceship {
 	
 	/**
 	 * <p>Gets and return the first movement from _orders (ArrayList<Movement>)</p>
-	 * @throws IndexOutOfBoundsException if the order array (_order attribute) is empty
 	 * @return TypeMovement, first movement from _orders
 	 */
 	public TypeMovement getOrder() {

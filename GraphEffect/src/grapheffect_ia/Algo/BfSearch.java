@@ -47,7 +47,7 @@ public class BfSearch {
                 }
             }
         }
-    }
+    }	
     
     /**
      * Getter for a specific hexagon inside the HashMap _distances attribute.

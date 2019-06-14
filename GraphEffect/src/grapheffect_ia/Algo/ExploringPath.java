@@ -56,6 +56,7 @@ public class ExploringPath {
 				}
 			}
 		}
+		System.out.println(result);
 		return result;
 	}
 	
