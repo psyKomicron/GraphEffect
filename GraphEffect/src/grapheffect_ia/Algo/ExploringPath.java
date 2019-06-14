@@ -39,18 +39,30 @@ public class ExploringPath {
 	 */
 	public Hexagon getUnknownHexagonToVisit() {
 		Hexagon result = null;
-		int coutMin = Integer.MAX_VALUE;
+		int minCost = Integer.MAX_VALUE;
 		for(Hexagon hexa : _map.getHexagon()) {
 			if(_pathFromBase.isReachable(hexa) && _pathFromShip.isReachable(hexa) && hexa.getType().equals(TypeHexagon.UNKNOW)) {
-				int coutDistance = _pathFromBase.getDistance(hexa) + _pathFromShip.getDistance(hexa);
-				int cout = coutDistance;
-				if(cout < coutMin) {
+				int distanceCost = _pathFromBase.getDistance(hexa) + _pathFromShip.getDistance(hexa);
+				int neighborCost = 0;
+				for(Hexagon neighbor : hexa.getNeighbours()) {
+					if(!(neighbor.getType().equals(TypeHexagon.UNKNOW))) {
+						neighborCost++;
+					}
+				}
+				int cost = distanceCost + neighborCost;
+				if(cost < minCost) {
 					result = hexa;
-					coutMin = cout;
+					minCost = cost;
 				}
 			}
 		}
 		return result;
+	}
+	
+	public boolean isReachable(Hexagon hexa) {
+		if(hexa.isAccessible()) {
+			return true;
+		} else return false;
 	}
 
 }
