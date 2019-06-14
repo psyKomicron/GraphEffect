@@ -40,7 +40,7 @@ public class ChooseDestinationState extends State {
 			destination = ep.getUnknownHexagonToVisit();
 			getMemoryModule().getSpaceships().get(0).setGoalPosition(destination.getCoordinate());
 		}
-		getMemoryModule().getSpaceships().get(0).addOrders(ep.getPath(destination));;
+		getMemoryModule().getSpaceships().get(0).addOrders(ep.getPath(destination));
 	}
 
 }
