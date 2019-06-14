@@ -10,11 +10,11 @@ import grapheffect_ia.Model.Map.Coordinate;
  *
  */
 public class ExplorerSpaceship extends Spaceship {
-	private static int _explorer_count;
+	private static int _explorerCount;
 
 	public ExplorerSpaceship(Coordinate position, String name) {
 		super(position, name);
-		_explorer_count++;
+		_explorerCount++;
 	}
 
 	
@@ -38,7 +38,7 @@ public class ExplorerSpaceship extends Spaceship {
 	
 	@Override
 	public int getCount() {
-		return _explorer_count;
+		return _explorerCount;
 	}
 
 }
