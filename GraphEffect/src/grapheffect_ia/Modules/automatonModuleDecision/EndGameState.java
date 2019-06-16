@@ -16,11 +16,17 @@ public class EndGameState extends State {
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String messageToSend() {
 		return "END";
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public State transition() {
 		getAi().stopDiscussion();

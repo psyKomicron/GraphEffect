@@ -16,7 +16,7 @@ public class InitialState extends State {
 	}
 
 	/**
-	 * @see {@link grapheffect_ia.Modules.automatonModule.State}
+	 * {@inheritDoc}
 	 */
 	@Override
 	public String messageToSend() {
@@ -24,7 +24,7 @@ public class InitialState extends State {
 	}
 
 	/**
-	 * @see {@link grapheffect_ia.Modules.automatonModule.State}
+	 * {@inheritDoc}
 	 */
 	@Override
 	public State transition() {

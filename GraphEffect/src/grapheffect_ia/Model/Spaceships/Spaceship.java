@@ -25,8 +25,8 @@ public abstract class Spaceship {
 	
 	/**
 	 * Constructs a spaceship with its position and name 
-	 * @param position
-	 * @param name
+	 * @param position position where the spaceship has been built
+	 * @param name name of the spaceship
 	 */
 	public Spaceship(Coordinate position, String name) {
 		_position = position;
@@ -38,7 +38,7 @@ public abstract class Spaceship {
 	/**
 	 * Constructs a spaceship with it's starting coordinates
 	 * @deprecated
-	 * @param position
+	 * @param position position where the spaceship has been built
 	 */
 	public Spaceship(Coordinate position) {
 		_position = position;
@@ -159,7 +159,7 @@ public abstract class Spaceship {
 	// Abstract methods
 	/**
 	 * Return the type of this spaceship
-	 * @return TypeSpaceShip, type of the spaceship (see {@link grapheffect_ia.Model.SpaceShips.TypeSpaceShip})
+	 * @return TypeSpaceShip, type of the spaceship (see {@link grapheffect_ia.Model.Spaceships.TypeSpaceship})
 	 */
 	public abstract TypeSpaceship getType();
 	

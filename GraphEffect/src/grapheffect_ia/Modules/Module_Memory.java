@@ -77,6 +77,7 @@ public class Module_Memory extends Module  {
     
     /**
      * Setter for _space_ships
+     * @param name name of the ship
      */
     public void addSpaceships(String name) {
     	switch(name) {
@@ -102,7 +103,7 @@ public class Module_Memory extends Module  {
      * Creates a map with {@link Map#Map(String)}. The string used is given by the reaction module after it used the {@link Module_Memory#hasMap()} and
      * the method has return false.
      * </p> 
-     * @param messageReceived
+     * @param messageReceived message to generate the map from
      */
     public void generateMap(String messageReceived) {
     	_map = new Map(messageReceived);
@@ -118,7 +119,7 @@ public class Module_Memory extends Module  {
      * If not the function raise a NullPointerException which is caught by the method thus returns false.
      * Else if the module has a map then the method returns true
      * </p>
-     * @return
+     * @return boolean
      */
     public boolean hasMap() {
     	return this._mapUpToDate;

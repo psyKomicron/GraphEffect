@@ -17,7 +17,7 @@ public class EndTurnState extends State {
 	}
 
 	/**
-	 * @see {@link grapheffect_ia.Modules.automatonModule.State}
+	 * {@inheritDoc}
 	 */
 	@Override
 	public String messageToSend() {
@@ -25,7 +25,7 @@ public class EndTurnState extends State {
 	}
 
 	/**
-	 * @see {@link grapheffect_ia.Modules.automatonModule.State}
+	 * {@inheritDoc}
 	 */
 	@Override
 	public State transition() {

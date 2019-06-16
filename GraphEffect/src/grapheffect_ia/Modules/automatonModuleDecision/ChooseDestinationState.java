@@ -14,11 +14,17 @@ public class ChooseDestinationState extends State {
 		super(ai);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String messageToSend() {
 		return "";
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public State transition() {
 		/*
@@ -30,7 +36,7 @@ public class ChooseDestinationState extends State {
 		getMemoryModule().getSpaceship().get(0).addOrders(ep.getPath(destination));
 		return new MovingState(getAi());
 		*/
-		if(!(getMemoryModule().getMap().isExplored())) {
+		try {
 			Hexagon shipHexagon = getMemoryModule().getMap().getHexagon(getMemoryModule().getSpaceships().get(0).getPosition());
 			Hexagon baseHexagon = getMemoryModule().getBaseHexagon();
 			ExploringPath ep = new ExploringPath(getMemoryModule().getMap());
@@ -43,7 +49,9 @@ public class ChooseDestinationState extends State {
 			getMemoryModule().getSpaceships().get(0).addOrders(ep.getPath(destination));
 			return new MovingState(getAi());
 		}
-		else return new EndGameState(getAi());
+		catch(NullPointerException npe) {
+			return new EndGameState(getAi());
+		}
 	}
 
 }

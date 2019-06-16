@@ -14,6 +14,10 @@ public class Map {
     private HashMap<Coordinate, Hexagon> _hexagons;
     protected boolean _explored = false;
     
+    /**
+     * Makes a map from the server response
+     * @param messageReceived string sent by the server
+     */
     public Map(String messageReceived) {
         _hexagons = new HashMap<>();
         for(int i = 0; i < 41; i++) {
@@ -35,6 +39,7 @@ public class Map {
         		}
         	}
         }
+        System.err.println(_explored);
     }
     
     /**
