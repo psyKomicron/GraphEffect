@@ -137,8 +137,13 @@ public abstract class Spaceship {
 		_orders.clear();
 	}
 	
+	/**
+	 * <p>Uses the static attribute of the spaceship and its type (name) to make a string like :</p>
+	 * <p>Explorer_1</p>
+	 * @return String
+	 */
 	public String generateName() {
-		return this.getName()+"_"+this.getCount();
+		return getName()+"_"+getCount();
 	}
 	
 	public boolean needUpdatedMap() throws NullPointerException {
