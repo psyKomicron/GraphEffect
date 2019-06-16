@@ -12,12 +12,16 @@ import java.util.HashMap;
 public class Map {
     
     private HashMap<Coordinate, Hexagon> _hexagons;
+    protected boolean _explored = false;
     
     public Map(String messageReceived) {
         _hexagons = new HashMap<>();
         for(int i = 0; i < 41; i++) {
             for(int j = 0; j < 55; j++) {
                 this.addHexagon(new Coordinate(i, j), messageReceived.charAt(j +(55*i)));
+                if(messageReceived.charAt(j +(55*i)) == 'X') {
+                	_explored = false;
+                }
             }
         }
         for(int i = 0; i < 41; i++) {
@@ -57,8 +61,19 @@ public class Map {
     	return hexagon;
     }
     
-    public Collection<Hexagon> getHexagon() {
+    /**
+     * Return the whole map
+     * @return collection of Hexagon
+     */
+    public Collection<Hexagon> getHexagons() {
     	return _hexagons.values();
     }
     
+    /**
+     * Tells if the map is completely explored or not
+     * @return boolean
+     */
+    public boolean isExplored() {
+    	return _explored;
+    }
 } 

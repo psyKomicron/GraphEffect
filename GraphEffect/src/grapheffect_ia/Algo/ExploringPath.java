@@ -40,7 +40,7 @@ public class ExploringPath {
 	public Hexagon getUnknownHexagonToVisit() {
 		Hexagon result = null;
 		int minCost = Integer.MAX_VALUE;
-		for(Hexagon hexa : _map.getHexagon()) {
+		for(Hexagon hexa : _map.getHexagons()) {
 			if(_pathFromBase.isReachable(hexa) && _pathFromShip.isReachable(hexa) && hexa.getType().equals(TypeHexagon.UNKNOW)) {
 				int distanceCost = _pathFromBase.getDistance(hexa) + _pathFromShip.getDistance(hexa);
 				int neighborCost = 0;
@@ -56,7 +56,6 @@ public class ExploringPath {
 				}
 			}
 		}
-		System.out.println(result);
 		return result;
 	}
 	

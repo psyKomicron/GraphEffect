@@ -12,7 +12,6 @@ public class ChooseDestinationState extends State {
 
 	public ChooseDestinationState(AI ai) {
 		super(ai);
-		System.err.println("ChooseDestinationState");
 	}
 
 	@Override
@@ -31,16 +30,20 @@ public class ChooseDestinationState extends State {
 		getMemoryModule().getSpaceship().get(0).addOrders(ep.getPath(destination));
 		return new MovingState(getAi());
 		*/
-		Hexagon shipHexagon = getMemoryModule().getMap().getHexagon(getMemoryModule().getSpaceships().get(0).getPosition());
-		Hexagon baseHexagon = getMemoryModule().getBaseHexagon();
-		ExploringPath ep = new ExploringPath(getMemoryModule().getMap());
-		ep.calculation(shipHexagon, baseHexagon);
-		Hexagon destination = ep.getUnknownHexagonToVisit();
-		if(destination == null || !(destination.isAccessible()) || destination.equals(shipHexagon)) {
-			destination = ep.getUnknownHexagonToVisit();
-			getMemoryModule().getSpaceships().get(0).setGoalPosition(destination.getCoordinate());
+		if(!(getMemoryModule().getMap().isExplored())) {
+			Hexagon shipHexagon = getMemoryModule().getMap().getHexagon(getMemoryModule().getSpaceships().get(0).getPosition());
+			Hexagon baseHexagon = getMemoryModule().getBaseHexagon();
+			ExploringPath ep = new ExploringPath(getMemoryModule().getMap());
+			ep.calculation(shipHexagon, baseHexagon);
+			Hexagon destination = ep.getUnknownHexagonToVisit();
+			if(destination == null || !(destination.isAccessible()) || destination.equals(shipHexagon)) {
+				destination = ep.getUnknownHexagonToVisit();
+				getMemoryModule().getSpaceships().get(0).setGoalPosition(destination.getCoordinate());
+			}
+			getMemoryModule().getSpaceships().get(0).addOrders(ep.getPath(destination));
+			return new MovingState(getAi());
 		}
-		getMemoryModule().getSpaceships().get(0).addOrders(ep.getPath(destination));
+		else return new EndGameState(getAi());
 	}
 
 }
