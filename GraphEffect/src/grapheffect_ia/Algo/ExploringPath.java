@@ -25,8 +25,8 @@ public class ExploringPath {
 	}
 	
 	public void calculation(Hexagon shipHexagon, Hexagon baseHexagon) {
-		_pathFromShip.calculation(shipHexagon);
-		_pathFromBase.calculation(baseHexagon);
+		_pathFromShip.calculation(baseHexagon);
+		_pathFromBase.calculation(shipHexagon);
 	}
 	
 	public ArrayList<TypeMovement> getPath(Hexagon end) {

@@ -15,7 +15,7 @@ public class Coordinate {
     private int column;
     
     
-    public Coordinate(int line, int column) {
+    public Coordinate(int column, int line) {
         this.line = line;
         this.column = column;
     }
@@ -74,8 +74,8 @@ public class Coordinate {
      */
     public Coordinate neighbour(TypeMovement movement) {
     	Coordinate coordinate = null;
-    	int j = this.column;
     	int i = this.line;
+    	int j = this.column;
     	if(j%2 == 0) {
     		switch(movement) {
     		case TOP :

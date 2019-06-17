@@ -30,7 +30,7 @@ public class EndGameState extends State {
 	@Override
 	public State transition() {
 		getAi().stopDiscussion();
-		return null;
+		return new InitialState(getAi());
 	}
 
 }

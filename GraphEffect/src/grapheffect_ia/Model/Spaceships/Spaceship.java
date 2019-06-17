@@ -166,9 +166,14 @@ public abstract class Spaceship {
 		return needUpdatedMap;
 	}
 	
+	/**
+	 * Check if where the spaceship is headed is free
+	 * @return
+	 */
 	public boolean canDoOrder() {
 		if(getOrder() != null) {
 			if(_memoryModule.isCoordinateFree(_position.neighbour(getOrder()))) {
+				System.err.println("position : "+_position);	
 				return true;
 			} else return false;
 		} else return false;

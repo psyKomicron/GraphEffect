@@ -31,19 +31,20 @@ public class ChooseDestinationState extends State {
 	@Override
 	public State transition() {
 		try {
-			Hexagon shipHexagon = getMemoryModule().getMap().getHexagon(getMemoryModule().getSpaceships().get(0).getPosition());
+			Hexagon shipHexagon = getMemoryModule().getMap().getHexagon(_spaceship.getPosition());
 			Hexagon baseHexagon = getMemoryModule().getBaseHexagon();
 			ExploringPath ep = new ExploringPath(getMemoryModule().getMap());
 			ep.calculation(shipHexagon, baseHexagon);
 			Hexagon destination = ep.getUnknownHexagonToVisit();
 			if(destination == null || !(destination.isAccessible()) || destination.equals(shipHexagon)) {
 				destination = ep.getUnknownHexagonToVisit();
-				getMemoryModule().getSpaceships().get(0).setGoalPosition(destination.getCoordinate());
+				_spaceship.setGoalPosition(destination.getCoordinate());
 			}
-			getMemoryModule().getSpaceships().get(0).addOrders(ep.getPath(destination));
+			_spaceship.addOrders(ep.getPath(destination));
 			return new MovingState(getAi(), getMemoryModule().getCurrentSpaceship());
 		}
 		catch(NullPointerException npe) {
+			npe.printStackTrace();
 			return new EndGameState(getAi());
 		}
 	}
