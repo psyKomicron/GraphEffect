@@ -2,6 +2,7 @@ package grapheffect_ia.Model.Map;
 
 import grapheffect_ia.Model.Map.Hexagon.Hexagon;
 import grapheffect_ia.Model.Map.Hexagon.HexagonFactory;
+import grapheffect_ia.Model.Map.Hexagon.TypeHexagon;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -13,6 +14,7 @@ public class Map {
     
     private HashMap<Coordinate, Hexagon> _hexagons;
     protected boolean _explored = false;
+    private float _percentExplored;
     
     /**
      * Makes a map from the server response
@@ -39,7 +41,8 @@ public class Map {
         		}
         	}
         }
-        System.err.println(_explored);
+        // were are not programming in C ;)
+        calculateMapExplorationPercentage();
     }
     
     /**
@@ -80,5 +83,29 @@ public class Map {
      */
     public boolean isExplored() {
     	return _explored;
+    }
+    
+    public void setPercentExplored(float d) {
+    	_percentExplored = d;
+    }
+    
+    public void calculateMapExplorationPercentage() {
+    	int nX = 0;
+    	int n = 0;
+    	for (Hexagon hexa : _hexagons.values()) {
+    		if(hexa.getType().equals(TypeHexagon.UNKNOW)) {
+    			nX++;
+    		}
+    		n++;
+    	}
+    	int mapSize = _hexagons.size();
+    	if (!(n == mapSize)) {
+    		throw new UnsupportedOperationException();
+    	}
+    	System.out.println(n);
+    	System.out.println(nX);
+    	float percent = (nX/mapSize);
+    	setPercentExplored(percent);
+    	System.err.println(percent);
     }
 } 
