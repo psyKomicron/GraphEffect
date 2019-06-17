@@ -12,6 +12,7 @@ import grapheffect_ia.Modules.Module_Memory;
  *
  */
 public class SpaceshipFactory {
+	public static int _SpaceshipsNumber;
 
 	/**
 	 * Constructs a spaceship of a specified type (arg), its place of creation coordinates and its name (used by the communication protocol).
@@ -39,6 +40,7 @@ public class SpaceshipFactory {
 		default :
 			throw new NullPointerException("\n default case on : \n\tSpaceShipFactory.createSpaceShip");
 		}
+		_SpaceshipsNumber++;
 		spaceship.setMap(map);
 		return spaceship;
 	}

@@ -114,6 +114,10 @@ public class Module_Memory extends Module  {
         }
     }
     
+    public int getSpaceshipsNumber() {
+    	return SpaceshipFactory._SpaceshipsNumber;
+    }
+    
     /**
      * <p>
      * Check if the memory module has stored the map of the game.
@@ -163,7 +167,7 @@ public class Module_Memory extends Module  {
     public boolean isCoordinateFree(Coordinate c) {
     	boolean isFree = true;
     	for(Spaceship spaceship : _spaceships) {
-    		if(spaceship.getPosition() == c) {
+    		if(spaceship.getPosition().equals(c)) {
     			isFree = false;
     		}
     	}

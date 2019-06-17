@@ -18,7 +18,7 @@ import grapheffect_ia.Modules.Module_Memory;
 public abstract class Spaceship {
 	private Coordinate _position;
 	private Coordinate _goalPosition;
-	private Module_Memory _moduleMemory;
+	private Module_Memory _memoryModule;
 	private ArrayList<TypeMovement> _orders;
 	private int _ap;
 	private String _name;
@@ -26,7 +26,7 @@ public abstract class Spaceship {
 	
 	
 	/**
-	 * Constructs a spaceship with its position and name 
+	 * Constructs a spaceship with its position and name 	
 	 * @param position position where the spaceship has been built
 	 * @param name name of the spaceship
 	 */
@@ -35,6 +35,7 @@ public abstract class Spaceship {
 		_orders = new ArrayList<>();
 		_ap = 6;
 		_name = name;
+		_memoryModule = memoryModule;
 	}
 	
 	/**
@@ -130,9 +131,11 @@ public abstract class Spaceship {
 	 * <p>Finally removes the order that has just been executed from the order array</p>
 	 */
 	public void doOrder() throws NullPointerException {
-		_position = _position.neighbour(this.getOrder());
+		if (canDoOrder()) {
+			_position = _position.neighbour(this.getOrder());
+			_orders.remove(this.getOrder());
+		}
 		_ap -= 1;
-		_orders.remove(this.getOrder());
 	}
 	
 	public void clearOrders() {
@@ -164,7 +167,11 @@ public abstract class Spaceship {
 	}
 	
 	public boolean canDoOrder() {
-		if()
+		if(getOrder() != null) {
+			if(_memoryModule.isCoordinateFree(_position.neighbour(getOrder()))) {
+				return true;
+			} else return false;
+		} else return false;
 	}
 	
 	// Abstract methods
