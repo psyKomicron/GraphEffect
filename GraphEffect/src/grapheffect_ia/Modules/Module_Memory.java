@@ -19,7 +19,7 @@ public class Module_Memory extends Module  {
     private Coordinate _coordinateBase;
     private Map _map;
     private boolean _mapUpToDate;
-    private int _numCurrentShip;
+    private int _numCurrentSpaceship;
 	
     /**
      * <p>
@@ -30,7 +30,7 @@ public class Module_Memory extends Module  {
     public Module_Memory(AI ai) {
         super(ai);
         _spaceships = new ArrayList<>();
-       _numCurrentShip = 0;
+       _numCurrentSpaceship = 0;
     }
     
     /**
@@ -68,11 +68,14 @@ public class Module_Memory extends Module  {
     }
     
     public Spaceship getCurrentSpaceship() {
-    	return _spaceships.get(_numCurrentShip);
+    	return _spaceships.get(_numCurrentSpaceship);
     }
     
-    public void nextShip() {
-    	_numCurrentShip = _numCurrentShip%_spaceships.size();
+    public void nextSpaceship() {
+    	_numCurrentSpaceship++;
+    	if (_numCurrentSpaceship > _spaceships.size()) {
+    		_numCurrentSpaceship = _numCurrentSpaceship%_spaceships.size();
+    	}
     }
     
     /**

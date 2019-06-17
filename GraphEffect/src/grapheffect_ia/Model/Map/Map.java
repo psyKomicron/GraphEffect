@@ -85,10 +85,22 @@ public class Map {
     	return _explored;
     }
     
-    public void setPercentExplored(float d) {
-    	_percentExplored = d;
+    public float getPercentExploredFloat() {
+    	return _percentExplored;
     }
     
+    public int getPercentExploredInt() {
+    	return (int)(_percentExplored);
+    }
+    
+    public void setPercentExplored(float d) {
+    	_percentExplored = (float)(1)-d;
+    	System.out.println(_percentExplored);
+    }
+    
+    /**
+     * Calculates the percentage of map that has been explored
+     */
     public void calculateMapExplorationPercentage() {
     	int nX = 0;
     	int n = 0;
@@ -99,13 +111,7 @@ public class Map {
     		n++;
     	}
     	int mapSize = _hexagons.size();
-    	if (!(n == mapSize)) {
-    		throw new UnsupportedOperationException();
-    	}
-    	System.out.println(n);
-    	System.out.println(nX);
-    	float percent = (nX/mapSize);
+    	float percent = ((float)(nX)/(float)(mapSize));
     	setPercentExplored(percent);
-    	System.err.println(percent);
     }
 } 
