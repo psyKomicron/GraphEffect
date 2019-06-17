@@ -4,12 +4,14 @@
 package grapheffect_ia.Modules.automatonModuleDecision;
 
 import grapheffect_ia.AI;
+import grapheffect_ia.Model.Spaceships.Spaceship;
 
 /**
  * @author julie
  *
  */
 public class MovingState extends State {
+	private Spaceship _spaceship;
 
 	public MovingState(AI ai) {
 		super(ai);
