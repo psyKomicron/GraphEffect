@@ -13,8 +13,9 @@ import grapheffect_ia.Model.Spaceships.Spaceship;
 public class MovingState extends State {
 	private Spaceship _spaceship;
 
-	public MovingState(AI ai) {
+	public MovingState(AI ai, Spaceship spaceship) {
 		super(ai);
+		_spaceship = spaceship;
 	}
 
 	/**
@@ -42,7 +43,7 @@ public class MovingState extends State {
 		if(this.getMemoryModule().getSpaceships().get(0).needUpdatedMap()) {
 			this.getMemoryModule().updateMap(false);
 			transition = new MapState(getAi());
-		} else transition = new ManageSpaceshipsState(getAi());
+		} else transition = new NeedSpaceshipState(getAi());
 		return transition;
 	}
 

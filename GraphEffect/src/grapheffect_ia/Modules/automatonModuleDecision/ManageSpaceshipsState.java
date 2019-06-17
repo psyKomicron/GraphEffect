@@ -31,17 +31,22 @@ public class ManageSpaceshipsState extends State {
 	 */
 	@Override
 	public State transition() {
-		State transition = null;
-		if(this.getMemoryModule().getSpaceships().get(0).getAp() < 1) {
-			transition = new EndTurnState(getAi());
+		getMemoryModule().nextSpaceship();
+		State newState = new EndTurnState(getAi());
+		int sumAp = 0;
+		for(Spaceship s : getMemoryModule().getSpaceships()) {
+			sumAp += s.getAp();
 		}
-		else if(this.getMemoryModule().getSpaceships().get(0).getAp() >= 1 && this.getMemoryModule().getSpaceships().get(0).getOrder() != null) {
-			transition = new MovingState(getAi());
+		if(sumAp > 0) {
+			while(this.getMemoryModule().getCurrentSpaceship().getAp() == 0) {
+				this.getMemoryModule().nextSpaceship();
+			}
+			newState = new MovingState(getAi(), getMemoryModule().getCurrentSpaceship());
+			if(getMemoryModule().getCurrentSpaceship().getOrder() == null) {
+				newState = new ChooseDestinationState(getAi(), getMemoryModule().getCurrentSpaceship());
+			}
 		}
-		else {
-			transition = new ChooseDestinationState(getAi());
-		}
-		return transition;
+		return newState;
 	}
 
 }
