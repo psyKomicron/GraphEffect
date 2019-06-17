@@ -73,9 +73,7 @@ public class Module_Memory extends Module  {
     
     public void nextSpaceship() {
     	_numCurrentSpaceship++;
-    	if (_numCurrentSpaceship > _spaceships.size()) {
-    		_numCurrentSpaceship = _numCurrentSpaceship%_spaceships.size();
-    	}
+		_numCurrentSpaceship = _numCurrentSpaceship%_spaceships.size();
     }
     
     /**

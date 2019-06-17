@@ -4,15 +4,18 @@
 package grapheffect_ia.Modules.automatonModuleDecision;
 
 import grapheffect_ia.AI;
+import grapheffect_ia.Model.Spaceships.Spaceship;
 
 /**
  * @author julie
  *
  */
 public class ManageSpaceshipsState extends State {
+	private Spaceship _spaceship;
 
-	public ManageSpaceshipsState(AI ai) {
+	public ManageSpaceshipsState(AI ai, Spaceship spaceship) {
 		super(ai);
+		_spaceship = spaceship;
 	}
 
 	/**
