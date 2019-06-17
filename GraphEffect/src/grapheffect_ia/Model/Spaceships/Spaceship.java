@@ -10,6 +10,7 @@ import grapheffect_ia.Model.Map.Map;
 import grapheffect_ia.Model.Map.TypeMovement;
 import grapheffect_ia.Model.Map.Hexagon.Hexagon;
 import grapheffect_ia.Model.Map.Hexagon.TypeHexagon;
+import grapheffect_ia.Modules.Module_Memory;
 
 /**
  * @author julie
@@ -17,6 +18,7 @@ import grapheffect_ia.Model.Map.Hexagon.TypeHexagon;
 public abstract class Spaceship {
 	private Coordinate _position;
 	private Coordinate _goalPosition;
+	private Module_Memory _moduleMemory;
 	private ArrayList<TypeMovement> _orders;
 	private int _ap;
 	private String _name;
@@ -28,7 +30,7 @@ public abstract class Spaceship {
 	 * @param position position where the spaceship has been built
 	 * @param name name of the spaceship
 	 */
-	public Spaceship(Coordinate position, String name) {
+	public Spaceship(Coordinate position, String name, Module_Memory memoryModule) {
 		_position = position;
 		_orders = new ArrayList<>();
 		_ap = 6;
@@ -159,6 +161,10 @@ public abstract class Spaceship {
 			}
 		}
 		return needUpdatedMap;
+	}
+	
+	public boolean canDoOrder() {
+		if()
 	}
 	
 	// Abstract methods

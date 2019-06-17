@@ -4,6 +4,7 @@
 package grapheffect_ia.Model.Spaceships;
 
 import grapheffect_ia.Model.Map.Coordinate;
+import grapheffect_ia.Modules.Module_Memory;
 
 /**
  * @author julie
@@ -12,8 +13,8 @@ import grapheffect_ia.Model.Map.Coordinate;
 public class ExplorerSpaceship extends Spaceship {
 	private static int _explorerCount;
 
-	public ExplorerSpaceship(Coordinate position, String name) {
-		super(position, name);
+	public ExplorerSpaceship(Coordinate position, String name, Module_Memory memoryModule) {
+		super(position, name, memoryModule);
 		_explorerCount++;
 	}
 

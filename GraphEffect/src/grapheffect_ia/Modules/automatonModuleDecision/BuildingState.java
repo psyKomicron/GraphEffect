@@ -26,7 +26,7 @@ public class BuildingState extends State {
 	@Override
 	public State transition() {
 		this.getMemoryModule().addSpaceships("Explorer");
-		return new ManageSpaceshipsState(getAi());
+		return new ManageSpaceshipsState(getAi(), getMemoryModule().getCurrentSpaceship());
 	}
 
 }

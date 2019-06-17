@@ -38,14 +38,14 @@ public class Module_Communication extends Module {
 
     //send a message to the server
     public void sendMessage(String message) {
-        //System.out.println(">>"+message);
+        System.out.println(">>"+message);
         this.outputChannel.println(message);
     }
     
     //Receive a message from the server
     public String receiveMessage() throws IOException {
         String message = this.inputChannel.readLine();
-        //System.out.println("<<"+message);
+        System.out.println("<<"+message);
         return message;
     }
     

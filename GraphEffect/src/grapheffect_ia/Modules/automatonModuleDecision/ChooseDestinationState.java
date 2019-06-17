@@ -41,7 +41,7 @@ public class ChooseDestinationState extends State {
 				getMemoryModule().getSpaceships().get(0).setGoalPosition(destination.getCoordinate());
 			}
 			getMemoryModule().getSpaceships().get(0).addOrders(ep.getPath(destination));
-			return new MovingState(getAi());
+			return new MovingState(getAi(), getMemoryModule().getCurrentSpaceship());
 		}
 		catch(NullPointerException npe) {
 			return new EndGameState(getAi());
