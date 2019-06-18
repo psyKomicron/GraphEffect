@@ -1,6 +1,7 @@
 package grapheffect_ia.Modules.automatonModuleDecision;
 
 import grapheffect_ia.AI;
+import grapheffect_ia.Model.Spaceships.TypeSpaceship;
 
 /**
  * @author julie
@@ -26,8 +27,15 @@ public class NeedSpaceshipState extends State {
 	@Override
 	public State transition() {
 		State transition = null;
+		TypeSpaceship type = null;
 		if(getMemoryModule().getSpaceshipsNumber() <= 2 && getMemoryModule().isCoordinateFree(getMemoryModule().getBase())) {
-			transition = new BuildingState(getAi());
+			if (getMemoryModule().getSpaceshipsNumber(TypeSpaceship.EXPLORER) < 2) {
+				type = TypeSpaceship.CONSTRUCTOR;
+			}
+			else if (getMemoryModule().getSpaceshipsNumber(TypeSpaceship.CONSTRUCTOR) < 1 && getMemoryModule().getSpaceshipsNumber(TypeSpaceship.EXPLORER) > 2) {
+				type = TypeSpaceship.EXPLORER;
+			}
+			transition = new BuildingState(getAi(), type);
 		} else transition = new ManageSpaceshipsState(getAi(), getMemoryModule().getCurrentSpaceship());
 		return transition;
 	}

@@ -20,12 +20,9 @@ public class BuildingState extends State {
 	 */
 	@Override
 	public String messageToSend() {
-		return "BUILDSHIP|"+getMemoryModule().getCurrentSpaceship().generateName();
+		return "BUILDSHIP|"+_typeSpaceship.label;
 	}
-
-	/**
-	 * {@inheritDoc}
-	 */
+	
 	@Override
 	public State transition() {
 		this.getMemoryModule().addSpaceships(_typeSpaceship.label);

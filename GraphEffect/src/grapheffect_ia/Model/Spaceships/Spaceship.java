@@ -35,10 +35,10 @@ public abstract class Spaceship {
 	 * @param position position where the spaceship has been built
 	 * @param name name of the spaceship
 	 */
-	public Spaceship(Coordinate position, String name, Module_Memory memoryModule) {
+	public Spaceship(Coordinate position, String name, Module_Memory memoryModule, int ap) {
 		_position = position;
 		_orders = new ArrayList<>();
-		_ap = 6;
+		_ap = ap;
 		_name = name;
 		_memoryModule = memoryModule;
 		_active = true;

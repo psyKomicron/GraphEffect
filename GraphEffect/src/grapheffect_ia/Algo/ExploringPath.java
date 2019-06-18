@@ -60,9 +60,7 @@ public class ExploringPath {
 	}
 	
 	public boolean isReachable(Hexagon hexa) {
-		if(hexa.isAccessible()) {
-			return true;
-		} else return false;
+		return hexa.isAccessible();
 	}
 
 }
