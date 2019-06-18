@@ -1,15 +1,18 @@
 package grapheffect_ia.Modules.automatonModuleDecision;
 
 import grapheffect_ia.AI;
+import grapheffect_ia.Model.Spaceships.TypeSpaceship;
 
 /**
  * @author julie
  *
  */
 public class BuildingState extends State {
+	private TypeSpaceship _typeSpaceship;
 
-	public BuildingState(AI ai) {
+	public BuildingState(AI ai, TypeSpaceship typeSpaceship) {
 		super(ai);
+		_typeSpaceship = typeSpaceship;
 	}
 
 	/**
@@ -17,7 +20,7 @@ public class BuildingState extends State {
 	 */
 	@Override
 	public String messageToSend() {
-		return "BUILDSHIP|Explorer";
+		return "BUILDSHIP|"+getMemoryModule().getCurrentSpaceship().generateName();
 	}
 
 	/**
@@ -25,7 +28,7 @@ public class BuildingState extends State {
 	 */
 	@Override
 	public State transition() {
-		this.getMemoryModule().addSpaceships("Explorer");
+		this.getMemoryModule().addSpaceships(_typeSpaceship.label);
 		return new ManageSpaceshipsState(getAi(), getMemoryModule().getCurrentSpaceship());
 	}
 

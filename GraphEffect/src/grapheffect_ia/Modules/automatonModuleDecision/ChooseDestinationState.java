@@ -35,7 +35,7 @@ public class ChooseDestinationState extends State {
 		ExploringPath ep = new ExploringPath(getMemoryModule().getMap());
 		ep.calculation(shipHexagon, baseHexagon);
 		Hexagon destination = ep.getUnknownHexagonToVisit();
-		if(destination == null || !(destination.isAccessible()) || destination.equals(shipHexagon)) {
+		if(destination == null || !(ep.isReachable(destination)) || destination.equals(shipHexagon)) {
 			destination = ep.getUnknownHexagonToVisit();
 			if(destination == null) {
 				_spaceship.setInactive();

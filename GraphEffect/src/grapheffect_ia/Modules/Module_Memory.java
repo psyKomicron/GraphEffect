@@ -42,6 +42,21 @@ public class Module_Memory extends Module  {
 	}
     
     /**
+     * Return the number of spaceship of the given type
+     * @param type Type of spaceship to count
+     * @return Integer
+     */
+    public int getSpaceshipsNumber(TypeSpaceship type) {
+    	int i = 0;
+    	for(Spaceship ship : _spaceships) {
+    		if(ship.getType().equals(type)) {
+    			i++;
+    		}
+    	}
+    	return i;
+    }
+    
+    /**
      * Getter for Map._map.
      * @return Map _map attribute
      */

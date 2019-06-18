@@ -5,6 +5,7 @@ package grapheffect_ia.Modules.automatonModuleDecision;
 
 import grapheffect_ia.AI;
 import grapheffect_ia.Model.Spaceships.Spaceship;
+import grapheffect_ia.Model.Spaceships.TypeSpaceship;
 
 /**
  * @author julie
