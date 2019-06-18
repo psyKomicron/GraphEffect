@@ -3,7 +3,7 @@
  */
 package grapheffect_ia.Modules.automatonModuleDecision;
 
-import grapheffect_ia.Modules.Module_Decision;
+import grapheffect_ia.AI;
 
 /**
  * @author julie
@@ -11,19 +11,25 @@ import grapheffect_ia.Modules.Module_Decision;
  */
 public class EndTurnState extends State {
 
-	public EndTurnState(Module_Decision moduleDecision) {
-		super(moduleDecision);
+	public EndTurnState(AI ai) {
+		super(ai);
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String messageToSend() {
 		return "ENDTURN";
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public State transition() {
-		return new ManageSpaceshipState(getDecisionModule());
+		return new ManageSpaceshipsState(getAi(), getMemoryModule().getCurrentSpaceship());
 	}
 
 }

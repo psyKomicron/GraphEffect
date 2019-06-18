@@ -12,7 +12,7 @@ public class Module_Decision extends Module {
 
 	public Module_Decision(AI ai) {
 		super(ai);
-		_state = new InitialState(this);
+		_state = new InitialState(ai);
 	}
 
 	//Main method for the decision making

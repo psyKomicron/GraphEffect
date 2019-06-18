@@ -3,6 +3,7 @@
  */
 package grapheffect_ia.Modules.automatonModuleDecision;
 
+import grapheffect_ia.AI;
 import grapheffect_ia.Modules.Module_Decision;
 import grapheffect_ia.Modules.Module_Memory;
 
@@ -11,22 +12,27 @@ import grapheffect_ia.Modules.Module_Memory;
  *
  */
 public abstract class State {
-
-	private Module_Decision _moduleDecision;
+	private AI _ai;
 	
-	public State(Module_Decision moduleDecision) {
-		_moduleDecision = moduleDecision;
+	
+	public State(AI ai) {
+		_ai = ai;
 	}
 	
 	public Module_Decision getDecisionModule() {
-		return this._moduleDecision;
+		return _ai.getModuleDecision();
 	}
 	
 	public Module_Memory getMemoryModule() {
-		return this._moduleDecision.getAI().getModuleMemory();
+		return _ai.getModuleMemory();
+	}
+	
+	public AI getAi() {
+		return _ai;
 	}
 	
 	public abstract String messageToSend();
 	
 	public abstract State transition();
+	
 }

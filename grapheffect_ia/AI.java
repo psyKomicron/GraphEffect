@@ -38,7 +38,7 @@ public class AI {
     
     //Getter of the differents modules
     public Module_Communication getModuleCommunication() {
-        return this.moduleCommunication; 
+        return this.moduleCommunication;
     }
     public Module_Decision getModuleDecision() {
         return this.moduleDecision;

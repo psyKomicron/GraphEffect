@@ -1,33 +1,50 @@
-package grapheffect_ia.Modules.automatonModuleDecision;
+	package grapheffect_ia.Modules.automatonModuleDecision;
 
-import grapheffect_ia.Algo.BfSearch;
-import grapheffect_ia.Model.Map.Coordinate;
-import grapheffect_ia.Modules.Module_Decision;
+import grapheffect_ia.AI;
+import grapheffect_ia.Algo.ExploringPath;
+import grapheffect_ia.Model.Map.Hexagon.Hexagon;
+import grapheffect_ia.Model.Spaceships.Spaceship;
 
 /**
  * @author julie
  *
  */
 public class ChooseDestinationState extends State {
+	private Spaceship _spaceship;
 
-	public ChooseDestinationState(Module_Decision moduleDecision) {
-		super(moduleDecision);
-		// TODO Auto-generated constructor stub
+	public ChooseDestinationState(AI ai, Spaceship spaceship) {
+		super(ai);
+		_spaceship = spaceship;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String messageToSend() {
 		return "";
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public State transition() {
-		State transition = null;
-		BfSearch bfsearch = new BfSearch(this.getMemoryModule().getMap());
-		bfsearch.calculation(this.getMemoryModule().getMap().getHexagon( getMemoryModule().getSpaceShips().get(0).getPosition() ));
-		this.getMemoryModule().getSpaceShips().get(0).addOrders( bfsearch.getPath(getMemoryModule().getMap().getHexagon(new Coordinate(0,0))) );
-		transition = new MovingState(this.getDecisionModule());
-		return transition;
+		Hexagon shipHexagon = getMemoryModule().getMap().getHexagon(_spaceship.getPosition());
+		Hexagon baseHexagon = getMemoryModule().getBaseHexagon();
+		ExploringPath ep = new ExploringPath(getMemoryModule().getMap());
+		ep.calculation(shipHexagon, baseHexagon);
+		Hexagon destination = ep.getUnknownHexagonToVisit();
+		if(destination == null || !(ep.isReachable(destination)) || destination.equals(shipHexagon)) {
+			destination = ep.getUnknownHexagonToVisit();
+			if(destination == null) {
+				_spaceship.setInactive();
+			} else {
+				_spaceship.setGoalPosition(destination.getCoordinate());
+			}
+		}
+		_spaceship.addOrders(ep.getPath(destination));
+		return new MovingState(getAi(), getMemoryModule().getCurrentSpaceship());
 	}
 
 }

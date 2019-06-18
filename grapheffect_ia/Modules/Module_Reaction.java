@@ -48,7 +48,7 @@ public class Module_Reaction extends Module {
     
     private void reactionEndTurn(String messageReceived) {
     	if(messageReceived.equalsIgnoreCase("OK")) {
-    		ArrayList<Spaceship> array = _ai.getModuleMemory().getSpaceShips();
+    		ArrayList<Spaceship> array = _ai.getModuleMemory().getSpaceships();
     		for(Spaceship sp : array) {
     			sp.resetAp();
     		}

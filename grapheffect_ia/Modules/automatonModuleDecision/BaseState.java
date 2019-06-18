@@ -1,6 +1,6 @@
 package grapheffect_ia.Modules.automatonModuleDecision;
 
-import grapheffect_ia.Modules.Module_Decision;
+import grapheffect_ia.AI;
 
 /**
  * @author julie
@@ -8,18 +8,24 @@ import grapheffect_ia.Modules.Module_Decision;
  */
 public class BaseState extends State {
 
-	public BaseState(Module_Decision moduleDecision) {
-		super(moduleDecision);
+	public BaseState(AI ai) {
+		super(ai);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String messageToSend() {
 		return "BASE";
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public State transition() {
-		return new NeedSpaceshipState(getDecisionModule());
+		return new NeedSpaceshipState(getAi());
 	}
 
 }

@@ -47,8 +47,7 @@ public class BfSearch {
                 }
             }
         }
-    }
-
+    }	
     
     /**
      * Getter for a specific hexagon inside the HashMap _distances attribute.
@@ -108,6 +107,14 @@ public class BfSearch {
 	        Collections.reverse(path_movements);
         }
         return path_movements;
+    }
+    
+    public boolean isReachable(Hexagon hexa) {
+    	boolean reachable = false;
+    	if(_distances.get(hexa) != null && _distances.get(hexa) > -1	) {
+			reachable = true;
+    	}
+    	return reachable;
     }
     
 }

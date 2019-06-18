@@ -10,53 +10,92 @@ import grapheffect_ia.Model.Map.Map;
 import grapheffect_ia.Model.Map.TypeMovement;
 import grapheffect_ia.Model.Map.Hexagon.Hexagon;
 import grapheffect_ia.Model.Map.Hexagon.TypeHexagon;
+import grapheffect_ia.Modules.Module_Memory;
 
 /**
  * @author julie
  */
 public abstract class Spaceship {
 	private Coordinate _position;
-	private ArrayList<TypeMovement> _orders;
-	private int _ap;
-	private String _name;
+	private Coordinate _goalPosition;
+	private Module_Memory _memoryModule;
 	private Map _map;
+	private String _name;
 	
+	private ArrayList<TypeMovement> _orders;
+	
+	private int _ap;
+	private int _number;
+	private boolean _active;	
 	
 	/**
-	 * Constructs a spaceship with its position and name 
-	 * @param position
-	 * @param name
+	 * Constructs a spaceship with its position and name 	
+	 * @param position position where the spaceship has been built
+	 * @param name name of the spaceship
+	 * @param memoryModule no description to make here
+	 * @param ap number of action points of the spaceship. Specified internally by each subclass constructor
 	 */
-	public Spaceship(Coordinate position, String name) {
+	public Spaceship(Coordinate position, String name, Module_Memory memoryModule, int ap) {
 		_position = position;
 		_orders = new ArrayList<>();
-		_ap = 6;
+		_ap = ap;
 		_name = name;
+		_memoryModule = memoryModule;
+		_active = true;
 	}
-
+	
 	/**
 	 * Constructs a spaceship with it's starting coordinates
-	 * @param position
+	 * @deprecated
+	 * @param position position where the spaceship has been built
 	 */
 	public Spaceship(Coordinate position) {
 		_position = position;
 		_orders = new ArrayList<>();
 		_ap = 6;
 	}
+
+
+//********************************************************
+// 
+//					Getters/setters
+//
+//********************************************************
 	
-	public String getName() {
+	public void setNumber(int n) {
+		_number = n;
+	}
+	
+	protected String getName() {
 		return this._name;
 	}
 	
-	public void setName(String name) {
+	protected void setName(String name) {
 		_name = name;
 	}
 	
 	/**
-	 * Used to get the right name of the spaceship (look at the NetworkProtocol.pdf file). But for now it does not work :(
-	 * @return number of instances of the spaceship's type
+	 * Gets and return the value at the specified index
+	 * @param index, index value to retrieve
+	 * @return TypeMovement, movement at specified index
 	 */
-	public abstract int getCount();
+	public TypeMovement getOrder(int index) {
+		return _orders.get(index);
+	}
+	
+	/**
+	 * <p>Gets and return the first movement from _orders (ArrayList<Movement>)</p>
+	 * @return TypeMovement, first movement from _orders
+	 */
+	public TypeMovement getOrder() {
+		TypeMovement order;
+		try {
+			order = _orders.get(0);
+		} catch(IndexOutOfBoundsException ioobe) {
+			order = null;
+		}
+		return order;
+	}
 		
 	/**
 	 * _position getter
@@ -82,6 +121,33 @@ public abstract class Spaceship {
 		this._ap = ap;
 	}
 	
+	public void setMap(Map map) {
+		_map = map;
+	}
+	
+	public void setGoalPosition(Coordinate c) {
+		_goalPosition = c;
+	}
+	
+	public Coordinate getGoalPosition() {
+		return _goalPosition;
+	}
+	
+	public void setInactive() {
+		_active = false;
+	}
+
+	public boolean isActive() {
+		return _active;
+	}
+
+
+//********************************************************
+// 
+//						Others
+//
+//********************************************************
+	
 	/**
 	 * Add each movement from variable (list) to the _order attribute (which is an array)
 	 * @param list, array of each type movement for the ship to do
@@ -97,44 +163,63 @@ public abstract class Spaceship {
 	 * <p>Finally removes the order that has just been executed from the order array</p>
 	 */
 	public void doOrder() throws NullPointerException {
-		TypeMovement order = this.getOrder(); 
-		_position = _position.neighbour(order);
-		_ap -= 1;
-		_orders.remove(this.getOrder());
-	}
-	
-	/**
-	 * <p>Gets and return the first movement from _orders (ArrayList<Movement>)</p>
-	 * @throws IndexOutOfBoundsException if the order array (_order attribute) is empty
-	 * @return TypeMovement, first movement from _orders
-	 */
-	public TypeMovement getOrder() {
-		TypeMovement order;
-		try {
-			order = _orders.get(0);
-		} catch(IndexOutOfBoundsException ioobe) {
-			order = null;
+		if (canDoOrder()) {
+			_position = _position.neighbour(this.getOrder());
+			_orders.remove(this.getOrder());
 		}
-		return order;
-	}
-	
-	/**
-	 * Gets and return the value at the specified index
-	 * @param index, index value to retrieve
-	 * @return TypeMovement, movement at specified index
-	 */
-	public TypeMovement getOrder(int index) {
-		return _orders.get(index);
+		_ap -= 1;
 	}
 	
 	public void clearOrders() {
 		_orders.clear();
 	}
 	
-	// Abstract methods
+	/**
+	 * <p>Uses the static attribute of the spaceship and its type (name) to make a string like :</p>
+	 * <p>Explorer_1</p>
+	 * @return String
+	 */
+	public String generateName() {
+		return getName()+"_"+_number;
+	}
+	
+	public boolean needUpdatedMap() throws NullPointerException {
+		boolean needUpdatedMap = false;
+		if(_map == null) {
+			throw new NullPointerException("Map has not been instantiated");
+		}
+		for(Hexagon hex1 : _map.getHexagon(_position).getNeighbours()) {
+			for(Hexagon hex2 : _map.getHexagon(hex1.getCoordinate()).getNeighbours()) {
+				if(hex2.getType() == TypeHexagon.UNKNOW) {
+					needUpdatedMap = true;
+				}
+			}
+		}
+		return needUpdatedMap;
+	}
+	
+	/**
+	 * Check if where the spaceship is headed is free
+	 * @return boolean
+	 */
+	public boolean canDoOrder() {
+		boolean canDoOrder;
+		if(getOrder() != null && _memoryModule.isCoordinateFree(_position.neighbour(getOrder()))) {
+			canDoOrder = true;
+		} else canDoOrder = false;
+		return canDoOrder;
+	}
+	
+	
+//********************************************************
+// 
+//					Abstract methods
+//
+//********************************************************
+	
 	/**
 	 * Return the type of this spaceship
-	 * @return TypeSpaceShip, type of the spaceship (see {@link grapheffect_ia.Model.SpaceShips.TypeSpaceShip})
+	 * @return TypeSpaceShip, type of the spaceship (see {@link grapheffect_ia.Model.Spaceships.TypeSpaceship})
 	 */
 	public abstract TypeSpaceship getType();
 	
@@ -143,24 +228,10 @@ public abstract class Spaceship {
 	 */
 	public abstract void resetAp();
 
-	public String generateName() {
-		return this.getName()+"_"+this.getCount();
-	}
-	
-	public void setMap(Map map) {
-		_map = map;
-	}
-	
-	public boolean needUpdatedMap() {
-		boolean needUpdatedMap = false;
-		for(Hexagon hexagon : _map.getHexagon(_position).getNeighbours()) {
-			for(Hexagon n : _map.getHexagon(hexagon.getCoordinate()).getNeighbours()) {
-				if(n.getType() == TypeHexagon.UNKNOW) {
-					needUpdatedMap = true;
-				}
-			}
-		}
-		return needUpdatedMap;
-	}
+	/**
+	 * Return the number of instances of this spaceship's type (look at the NetworkProtocol.pdf file).
+	 * @return number of instances of the spaceship's type
+	 */
+	public abstract int getCount();
 	
 }

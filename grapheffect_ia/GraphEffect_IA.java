@@ -25,6 +25,10 @@ public class GraphEffect_IA {
         	System.err.println("Stream error");
         	ex.printStackTrace();
         }
+        catch (NullPointerException npe) {
+        	System.err.println("Server unexpectedly shuted down");
+        	npe.printStackTrace();
+        }
     }
     
 }

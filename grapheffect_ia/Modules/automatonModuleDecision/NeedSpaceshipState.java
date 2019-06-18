@@ -1,6 +1,7 @@
 package grapheffect_ia.Modules.automatonModuleDecision;
 
-import grapheffect_ia.Modules.Module_Decision;
+import grapheffect_ia.AI;
+import grapheffect_ia.Model.Spaceships.TypeSpaceship;
 
 /**
  * @author julie
@@ -8,22 +9,34 @@ import grapheffect_ia.Modules.Module_Decision;
  */
 public class NeedSpaceshipState extends State {
 
-	public NeedSpaceshipState(Module_Decision moduleDecision) {
-		super(moduleDecision);
-		// TODO Auto-generated constructor stub
+	public NeedSpaceshipState(AI ai) {
+		super(ai);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String messageToSend() {
 		return "";
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public State transition() {
 		State transition = null;
-		if(this.getMemoryModule().getSpaceShips() != null) {
-			transition = new ManageSpaceshipState(getDecisionModule());
-		} else transition = new BuildingState(getDecisionModule());
+		TypeSpaceship type = null;
+		if(getMemoryModule().getSpaceshipsNumber() <= 2 && getMemoryModule().isCoordinateFree(getMemoryModule().getBase())) {
+			if (getMemoryModule().getSpaceshipsNumber(TypeSpaceship.EXPLORER) <	 2) {
+				type = TypeSpaceship.EXPLORER;
+			}
+			else if (getMemoryModule().getSpaceshipsNumber(TypeSpaceship.CONSTRUCTOR) < 1 && getMemoryModule().getSpaceshipsNumber(TypeSpaceship.EXPLORER) >= 2) {
+				type = TypeSpaceship.CONSTRUCTOR;
+			}
+			transition = new BuildingState(getAi(), type);
+		} else transition = new ManageSpaceshipsState(getAi(), getMemoryModule().getCurrentSpaceship());
 		return transition;
 	}
 
