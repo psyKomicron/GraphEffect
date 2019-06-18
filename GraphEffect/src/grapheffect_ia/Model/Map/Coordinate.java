@@ -67,7 +67,7 @@ public class Coordinate {
     
     
     /**
-     * Calculates the new coordinate when a movement has been made on the map.
+     * <p>Calculates the new coordinate when a movement has been made on the map.</p>
      * e.g. a ship moves TOP, then the new coordinates are (x-1, y).
      * @param movement movement that the ship will do.
      * @return Coordinate new coordinates according to the movement that the ship has made.

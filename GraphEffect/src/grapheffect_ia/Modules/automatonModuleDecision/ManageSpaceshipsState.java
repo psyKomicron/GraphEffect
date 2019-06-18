@@ -49,7 +49,6 @@ public class ManageSpaceshipsState extends State {
 				newState = new ChooseDestinationState(getAi(), getMemoryModule().getCurrentSpaceship());
 			}
 		}
-		System.out.println(newState);
 		return newState;
 	}
 

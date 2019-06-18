@@ -1,6 +1,7 @@
 package grapheffect_ia.Modules;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import grapheffect_ia.AI;
 import grapheffect_ia.Model.Map.Coordinate;
@@ -25,12 +26,21 @@ public class Module_Memory extends Module  {
      * <p>
      * Constructor. Uses the super constructor inherited from Module and instantiates the SpaceShip array.
      * </p>
-     * @param ai
+     * @param ai Ai ?
      */
     public Module_Memory(AI ai) {
         super(ai);
         _spaceships = new ArrayList<>();
        _numCurrentSpaceship = 0;
+    }
+    
+    public int countOfAllSpaceships() {
+    	int countOfAllSpaceships = 0;
+    	HashMap<TypeSpaceship, Integer> hashmap = getSpaceshipsNumber();
+    	for(Integer i : hashmap.values()) {
+    		countOfAllSpaceships += i; 
+    	}
+    	return countOfAllSpaceships;
     }
     
     /**
@@ -40,6 +50,33 @@ public class Module_Memory extends Module  {
     public ArrayList<Spaceship> getSpaceships() {
 		return _spaceships;
 	}
+    
+    public HashMap<TypeSpaceship, Integer> getSpaceshipsNumber() {
+    	HashMap<TypeSpaceship, Integer> num = new HashMap<>();
+    	int numberOfConstructors = 0;
+    	int numberOfExplorers = 0;
+    	int numberOfFighters = 0;
+    	int numberOfTransporters = 0;
+    	for (Spaceship s : _spaceships) {
+    		if (s.getType().equals(TypeSpaceship.CONSTRUCTOR)) {
+    			numberOfConstructors++;
+    		}
+    		if (s.getType().equals(TypeSpaceship.EXPLORER)) {
+    			numberOfExplorers++;
+    		}
+    		if (s.getType().equals(TypeSpaceship.FIGHTER)) {
+    			numberOfFighters++;
+    		}
+    		if (s.getType().equals(TypeSpaceship.TRANSPORTER)) {
+    			numberOfTransporters++;
+    		}
+    	}
+    	num.put(TypeSpaceship.CONSTRUCTOR, numberOfConstructors);
+    	num.put(TypeSpaceship.EXPLORER, numberOfExplorers);
+    	num.put(TypeSpaceship.FIGHTER, numberOfFighters);
+    	num.put(TypeSpaceship.TRANSPORTER, numberOfTransporters);
+    	return num;
+    }
     
     /**
      * Return the number of spaceship of the given type
@@ -127,10 +164,6 @@ public class Module_Memory extends Module  {
         for(Spaceship spaceship : _spaceships) {
         	spaceship.setMap(_map);
         }
-    }
-    
-    public int getSpaceshipsNumber() {
-    	return SpaceshipFactory._SpaceshipsNumber;
     }
     
     /**

@@ -12,13 +12,13 @@ import grapheffect_ia.Modules.Module_Memory;
  *
  */
 public class SpaceshipFactory {
-	public static int _SpaceshipsNumber;
 
 	/**
 	 * Constructs a spaceship of a specified type (arg), its place of creation coordinates and its name (used by the communication protocol).
 	 * @param arg Type of spaceship to create (@see TypeSpaceShip)
 	 * @param base Where the ship has been created
 	 * @param map Map for the spaceship
+	 * @param memoryModule Module_Memory
 	 * @return SpaceShip The spaceship created
 	 * @throws NullPointerException if the arg value does'n match any TypeSpaceship values
 	 */
@@ -40,7 +40,6 @@ public class SpaceshipFactory {
 		default :
 			throw new NullPointerException("\n default case on : \n\tSpaceShipFactory.createSpaceShip");
 		}
-		_SpaceshipsNumber++;
 		spaceship.setMap(map);
 		spaceship.setNumber(spaceship.getCount());
 		return spaceship;

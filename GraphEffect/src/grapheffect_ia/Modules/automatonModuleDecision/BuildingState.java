@@ -23,6 +23,9 @@ public class BuildingState extends State {
 		return "BUILDSHIP|"+_typeSpaceship.label;
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public State transition() {
 		this.getMemoryModule().addSpaceships(_typeSpaceship.label);

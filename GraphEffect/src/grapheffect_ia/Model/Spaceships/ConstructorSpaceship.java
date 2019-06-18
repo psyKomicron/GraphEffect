@@ -20,24 +20,25 @@ public class ConstructorSpaceship extends Spaceship {
 
 	
 	/**
-	 * @see Spaceship
+	 * {@inheritDoc}
 	 */
 	@Override
 	public TypeSpaceship getType() {
 		return TypeSpaceship.CONSTRUCTOR;
 	}
-
 	
 	/**
-	 * @see Spaceship
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void resetAp() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		setAp(3);
 	}
 
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int getCount() {
 		return _constructor_count;

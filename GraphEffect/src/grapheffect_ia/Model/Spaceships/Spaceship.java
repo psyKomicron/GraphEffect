@@ -22,18 +22,18 @@ public abstract class Spaceship {
 	private Map _map;
 	private String _name;
 	
-	private int _ap;
-	private int _number;
-	
-	private boolean _active;
-	
 	private ArrayList<TypeMovement> _orders;
 	
+	private int _ap;
+	private int _number;
+	private boolean _active;	
 	
 	/**
 	 * Constructs a spaceship with its position and name 	
 	 * @param position position where the spaceship has been built
 	 * @param name name of the spaceship
+	 * @param memoryModule no description to make here
+	 * @param ap number of action points of the spaceship. Specified internally by each subclass constructor
 	 */
 	public Spaceship(Coordinate position, String name, Module_Memory memoryModule, int ap) {
 		_position = position;
@@ -54,16 +54,23 @@ public abstract class Spaceship {
 		_orders = new ArrayList<>();
 		_ap = 6;
 	}
+
+
+//********************************************************
+// 
+//					Getters/setters
+//
+//********************************************************
 	
 	public void setNumber(int n) {
 		_number = n;
 	}
 	
-	public String getName() {
+	protected String getName() {
 		return this._name;
 	}
 	
-	public void setName(String name) {
+	protected void setName(String name) {
 		_name = name;
 	}
 	
@@ -133,6 +140,13 @@ public abstract class Spaceship {
 	public boolean isActive() {
 		return _active;
 	}
+
+
+//********************************************************
+// 
+//						Instance method
+//
+//********************************************************
 	
 	/**
 	 * Add each movement from variable (list) to the _order attribute (which is an array)
@@ -186,7 +200,7 @@ public abstract class Spaceship {
 	
 	/**
 	 * Check if where the spaceship is headed is free
-	 * @return
+	 * @return boolean
 	 */
 	public boolean canDoOrder() {
 		boolean canDoOrder;
@@ -196,7 +210,13 @@ public abstract class Spaceship {
 		return canDoOrder;
 	}
 	
-	// Abstract methods
+	
+//********************************************************
+// 
+//					Abstract methods
+//
+//********************************************************
+	
 	/**
 	 * Return the type of this spaceship
 	 * @return TypeSpaceShip, type of the spaceship (see {@link grapheffect_ia.Model.Spaceships.TypeSpaceship})
