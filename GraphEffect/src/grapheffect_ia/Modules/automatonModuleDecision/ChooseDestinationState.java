@@ -30,23 +30,17 @@ public class ChooseDestinationState extends State {
 	 */
 	@Override
 	public State transition() {
-		try {
-			Hexagon shipHexagon = getMemoryModule().getMap().getHexagon(_spaceship.getPosition());
-			Hexagon baseHexagon = getMemoryModule().getBaseHexagon();
-			ExploringPath ep = new ExploringPath(getMemoryModule().getMap());
-			ep.calculation(shipHexagon, baseHexagon);
-			Hexagon destination = ep.getUnknownHexagonToVisit();
-			if(destination == null || !(destination.isAccessible()) || destination.equals(shipHexagon)) {
-				destination = ep.getUnknownHexagonToVisit();
-				_spaceship.setGoalPosition(destination.getCoordinate());
-			}
-			_spaceship.addOrders(ep.getPath(destination));
-			return new MovingState(getAi(), getMemoryModule().getCurrentSpaceship());
+		Hexagon shipHexagon = getMemoryModule().getMap().getHexagon(_spaceship.getPosition());
+		Hexagon baseHexagon = getMemoryModule().getBaseHexagon();
+		ExploringPath ep = new ExploringPath(getMemoryModule().getMap());
+		ep.calculation(shipHexagon, baseHexagon);
+		Hexagon destination = ep.getUnknownHexagonToVisit();
+		if(destination == null || !(destination.isAccessible()) || destination.equals(shipHexagon)) {
+			destination = ep.getUnknownHexagonToVisit();
+			_spaceship.setGoalPosition(destination.getCoordinate());
 		}
-		catch(NullPointerException npe) {
-			npe.printStackTrace();
-			return new EndGameState(getAi());
-		}
+		_spaceship.addOrders(ep.getPath(destination));
+		return new MovingState(getAi(), getMemoryModule().getCurrentSpaceship());
 	}
 
 }

@@ -37,7 +37,7 @@ public class MovingState extends State {
 	public State transition() {
 		State transition = null;
 		// setting the map for all spaceships
-		if(_spaceship.getOrder() != null) {
+		if(_spaceship.getOrder() != null && _spaceship.canDoOrder()) {
 			_spaceship.doOrder();
 		}
 		if(_spaceship.needUpdatedMap()) {

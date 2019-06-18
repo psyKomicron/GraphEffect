@@ -31,7 +31,7 @@ public class ManageSpaceshipsState extends State {
 	 */
 	@Override
 	public State transition() {
-		getMemoryModule().nextSpaceship();
+		// getMemoryModule().nextSpaceship();
 		State newState = new EndTurnState(getAi());
 		int sumAp = 0;
 		for(Spaceship s : getMemoryModule().getSpaceships()) {

@@ -19,10 +19,11 @@ public abstract class Spaceship {
 	private Coordinate _position;
 	private Coordinate _goalPosition;
 	private Module_Memory _memoryModule;
+	private Map _map;
 	private ArrayList<TypeMovement> _orders;
 	private int _ap;
 	private String _name;
-	private Map _map;
+	private int _number;
 	
 	
 	/**
@@ -47,6 +48,14 @@ public abstract class Spaceship {
 		_position = position;
 		_orders = new ArrayList<>();
 		_ap = 6;
+	}
+	
+	public int getNumber() {
+		return _number;
+	}
+	
+	public void setNumber(int n) {
+		_number = n;
 	}
 	
 	public String getName() {
@@ -148,7 +157,7 @@ public abstract class Spaceship {
 	 * @return String
 	 */
 	public String generateName() {
-		return getName()+"_"+getCount();
+		return getName()+"_"+_number;
 	}
 	
 	public boolean needUpdatedMap() throws NullPointerException {
@@ -171,12 +180,11 @@ public abstract class Spaceship {
 	 * @return
 	 */
 	public boolean canDoOrder() {
-		if(getOrder() != null) {
-			if(_memoryModule.isCoordinateFree(_position.neighbour(getOrder()))) {
-				System.err.println("position : "+_position);	
-				return true;
-			} else return false;
-		} else return false;
+		boolean canDoOrder;
+		if(getOrder() != null && _memoryModule.isCoordinateFree(_position.neighbour(getOrder()))) {
+			canDoOrder = true;
+		} else canDoOrder = false;
+		return canDoOrder;
 	}
 	
 	// Abstract methods

@@ -42,6 +42,7 @@ public class SpaceshipFactory {
 		}
 		_SpaceshipsNumber++;
 		spaceship.setMap(map);
+		spaceship.setNumber(spaceship.getCount());
 		return spaceship;
 	}
 }
