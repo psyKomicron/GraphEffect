@@ -1,4 +1,4 @@
-package grapheffect_ia.Modules.automatonModuleDecision;
+	package grapheffect_ia.Modules.automatonModuleDecision;
 
 import grapheffect_ia.AI;
 import grapheffect_ia.Algo.ExploringPath;
@@ -37,9 +37,12 @@ public class ChooseDestinationState extends State {
 		Hexagon destination = ep.getUnknownHexagonToVisit();
 		if(destination == null || !(destination.isAccessible()) || destination.equals(shipHexagon)) {
 			destination = ep.getUnknownHexagonToVisit();
-			_spaceship.setGoalPosition(destination.getCoordinate());
+			if(destination == null) {
+				_spaceship.setInactive();
+			} else {
+				_spaceship.setGoalPosition(destination.getCoordinate());
+			}
 		}
-		System.err.println(destination);
 		_spaceship.addOrders(ep.getPath(destination));
 		return new MovingState(getAi(), getMemoryModule().getCurrentSpaceship());
 	}

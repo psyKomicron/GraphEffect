@@ -35,10 +35,12 @@ public class ManageSpaceshipsState extends State {
 		State newState = new EndTurnState(getAi());
 		int sumAp = 0;
 		for(Spaceship s : getMemoryModule().getSpaceships()) {
-			sumAp += s.getAp();
+			if(_spaceship.isActive()) {
+				sumAp += s.getAp();
+			}
 		}
 		if(sumAp > 0) {
-			while(this.getMemoryModule().getCurrentSpaceship().getAp() == 0) {
+			while(this.getMemoryModule().getCurrentSpaceship().getAp() == 0 || !(getMemoryModule().getCurrentSpaceship().isActive())) {
 				this.getMemoryModule().nextSpaceship();
 			}
 			newState = new MovingState(getAi(), getMemoryModule().getCurrentSpaceship());
@@ -46,6 +48,7 @@ public class ManageSpaceshipsState extends State {
 				newState = new ChooseDestinationState(getAi(), getMemoryModule().getCurrentSpaceship());
 			}
 		}
+		System.out.println(newState);
 		return newState;
 	}
 

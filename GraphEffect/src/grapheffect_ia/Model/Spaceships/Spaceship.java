@@ -20,10 +20,14 @@ public abstract class Spaceship {
 	private Coordinate _goalPosition;
 	private Module_Memory _memoryModule;
 	private Map _map;
-	private ArrayList<TypeMovement> _orders;
-	private int _ap;
 	private String _name;
+	
+	private int _ap;
 	private int _number;
+	
+	private boolean _active;
+	
+	private ArrayList<TypeMovement> _orders;
 	
 	
 	/**
@@ -37,6 +41,7 @@ public abstract class Spaceship {
 		_ap = 6;
 		_name = name;
 		_memoryModule = memoryModule;
+		_active = true;
 	}
 	
 	/**
@@ -48,10 +53,6 @@ public abstract class Spaceship {
 		_position = position;
 		_orders = new ArrayList<>();
 		_ap = 6;
-	}
-	
-	public int getNumber() {
-		return _number;
 	}
 	
 	public void setNumber(int n) {
@@ -123,6 +124,14 @@ public abstract class Spaceship {
 	
 	public Coordinate getGoalPosition() {
 		return _goalPosition;
+	}
+	
+	public void setInactive() {
+		_active = false;
+	}
+
+	public boolean isActive() {
+		return _active;
 	}
 	
 	/**
