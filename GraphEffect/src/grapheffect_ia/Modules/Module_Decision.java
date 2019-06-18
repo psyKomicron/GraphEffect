@@ -22,6 +22,7 @@ public class Module_Decision extends Module {
 			_state = _state.transition();
 			answer = _state.messageToSend();
 		}
+		System.err.println(_state);
 		return answer;
 	}
 }

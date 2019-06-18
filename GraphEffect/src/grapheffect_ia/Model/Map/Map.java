@@ -103,12 +103,10 @@ public class Map {
      */
     public void calculateMapExplorationPercentage() {
     	int nX = 0;
-    	int n = 0;
     	for (Hexagon hexa : _hexagons.values()) {
     		if(hexa.getType().equals(TypeHexagon.UNKNOW)) {
     			nX++;
     		}
-    		n++;
     	}
     	int mapSize = _hexagons.size();
     	float percent = ((float)(nX)/(float)(mapSize));
