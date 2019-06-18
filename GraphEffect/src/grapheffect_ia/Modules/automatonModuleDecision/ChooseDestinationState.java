@@ -39,6 +39,7 @@ public class ChooseDestinationState extends State {
 			destination = ep.getUnknownHexagonToVisit();
 			_spaceship.setGoalPosition(destination.getCoordinate());
 		}
+		System.err.println(destination);
 		_spaceship.addOrders(ep.getPath(destination));
 		return new MovingState(getAi(), getMemoryModule().getCurrentSpaceship());
 	}
