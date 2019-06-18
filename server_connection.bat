@@ -1,4 +1,4 @@
 @echo off
 cd ./Servers/
-java -jar Server.jar
+java -jar RandomServer.jar
 sleep 100
