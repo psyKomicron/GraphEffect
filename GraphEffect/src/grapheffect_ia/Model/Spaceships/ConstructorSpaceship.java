@@ -14,7 +14,7 @@ public class ConstructorSpaceship extends Spaceship {
 	private static int _constructor_count;
 
 	public ConstructorSpaceship(Coordinate position, String name, Module_Memory memoryModule) {
-		super(position, name, memoryModule);
+		super(position, name, memoryModule, 3);
 		_constructor_count++;
 	}
 

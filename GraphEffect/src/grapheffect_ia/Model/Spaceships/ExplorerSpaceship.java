@@ -14,7 +14,7 @@ public class ExplorerSpaceship extends Spaceship {
 	private static int _explorerCount;
 
 	public ExplorerSpaceship(Coordinate position, String name, Module_Memory memoryModule) {
-		super(position, name, memoryModule);
+		super(position, name, memoryModule, 6);
 		_explorerCount++;
 	}
 

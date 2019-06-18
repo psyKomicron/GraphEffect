@@ -95,7 +95,7 @@ public class Map {
     
     public void setPercentExplored(float d) {
     	_percentExplored = (float)(1)-d;
-    	// System.out.println(_percentExplored);
+    	System.out.println("\t"+_percentExplored);
     }
     
     /**

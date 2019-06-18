@@ -14,7 +14,7 @@ public class FighterSpaceship extends Spaceship {
 	private static int _fighter_count;
 
 	public FighterSpaceship(Coordinate position, String name, Module_Memory memoryModule) {
-		super(position, name, memoryModule);
+		super(position, name, memoryModule, -1);
 		_fighter_count++;
 	}
 

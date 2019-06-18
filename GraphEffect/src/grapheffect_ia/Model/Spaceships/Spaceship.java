@@ -209,7 +209,7 @@ public abstract class Spaceship {
 	public abstract void resetAp();
 
 	/**
-	 * Used to get the right name of the spaceship (look at the NetworkProtocol.pdf file). Used by generateName().
+	 * Return the number of instances of this spaceship's type (look at the NetworkProtocol.pdf file).
 	 * @return number of instances of the spaceship's type
 	 */
 	public abstract int getCount();

@@ -14,7 +14,7 @@ public class TransporterSpaceship extends Spaceship{
 	private static int _transporter_count;
 
 	public TransporterSpaceship(Coordinate position, String name, Module_Memory memoryModule) {
-		super(position, name, memoryModule);
+		super(position, name, memoryModule, -1);
 		_transporter_count++;
 	}
 
