@@ -4,8 +4,9 @@ import java.io.IOException;
 import java.net.ConnectException;
 
 /**
- * 
+ * <p>If a method does not have javadoc it means that the method name explains clearly the purpose of the method (like getter/setters)</p>
  * @author Matthieu
+ * @author julie
  */
 public class GraphEffect_IA {
 
@@ -26,7 +27,7 @@ public class GraphEffect_IA {
         	ex.printStackTrace();
         }
         catch (NullPointerException npe) {
-        	System.err.println("Server unexpectedly shuted down");
+        	System.err.println("Server unexpectedly shuted down/application just crashed");
         	npe.printStackTrace();
         }
     }

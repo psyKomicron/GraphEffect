@@ -18,7 +18,7 @@ public class Map {
     private HashMap<TypeHexagon, Float> _hexagonOccupationPercentage;
     
     /**
-     * Makes a map from the server response
+     * <p>Makes a map from the server response</p>
      * @param messageReceived string sent by the server
      */
     public Map(String messageReceived) {
@@ -101,9 +101,12 @@ public class Map {
     	return (int)(_percentExplored);
     }
     
+    /**
+     * Set the {@link Map#_percentExplored} to 1 minus the parameter
+     * @param d
+     */
     private void setPercentExplored(float d) {
     	_percentExplored = (float)(1)-d;
-    	diplayMapPercentage();
     }
 
 //********************************************************
@@ -112,6 +115,10 @@ public class Map {
 //
 //********************************************************    
     
+    /**
+     * <p>Calculates the percentage of the map occupied by {@link TypeHexagon#UNKNOW}</p>
+     * <p>Then uses the {@link Map#setPercentExplored(float)} to set the value to the percentage of unexplored hexagon in the map</p>
+     */
     public void calculateUnknownMapPercentage() {
     	int nX = 0;
     	for (Hexagon hexa : _hexagons.values()) {
@@ -124,6 +131,9 @@ public class Map {
     	setPercentExplored(percent);
     }
     
+    /**
+     * Calculates the occupation percentage (on the map) of each type of hexagon {@link grapheffect_ia.Model.Map.Hexagon.TypeHexagon}.
+     */
     public void calculateHexagonTypePercentage() {
     	float nX = 0;
     	float nA = 0;
@@ -147,14 +157,18 @@ public class Map {
 			case STAR:
 				nS++;
 				break;
+			default :
+				System.err.println("default on calculateHexagon...");
     		}
     	}
+    	// calculating percentages by type
     	float nTotal = nX+nA+nE+nP+nS;
     	nX /= nTotal;
     	nA /= nTotal;
     	nE /= nTotal;
     	nP /= nTotal;
     	nS /= nTotal;
+    	// filling the HashMap
     	_hexagonOccupationPercentage.put(TypeHexagon.ASTEROID, nA);
     	_hexagonOccupationPercentage.put(TypeHexagon.EMPTY, nE);
     	_hexagonOccupationPercentage.put(TypeHexagon.PLANET, nP);
@@ -168,15 +182,18 @@ public class Map {
     public void calculateMapExplorationPercentage() {
     	calculateUnknownMapPercentage();
     	calculateHexagonTypePercentage();
+    	//displayMapPercentage();
     }
     
-    private void diplayMapPercentage() {
-    	System.err.print("\tMAP_EXPLORATION_POURCENTAGE : ");
-    	System.out.println(_percentExplored);
-    	
-    	System.err.print("\tMAP_OCCUPATION_PERCENTAGE : ");
-    	for (Float percentage : _hexagonOccupationPercentage.values()) {
-    		System.out.println(percentage);
+    /**
+     * @deprecated
+     */
+    private void displayMapPercentage() {
+    	System.out.print("\tMAP_EXPLORATION_POURCENTAGE : ");
+    	System.out.println((_percentExplored)*(float)(100));
+    	System.out.println("\tMAP_OCCUPATION_PERCENTAGE : ");
+    	for (TypeHexagon type : TypeHexagon.values()) {
+    		System.out.println("\t\t"+type+" "+(_hexagonOccupationPercentage.get(type)*100.));
     	}
     	System.out.println();
 	}

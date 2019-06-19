@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import grapheffect_ia.AI;
-import grapheffect_ia.Model.Map.Coordinate;
 import grapheffect_ia.Model.Map.Map;
+import grapheffect_ia.Model.Map.Coordinate;
 import grapheffect_ia.Model.Map.Hexagon.Hexagon;
-import grapheffect_ia.Model.Spaceships.SpaceshipFactory;
 import grapheffect_ia.Model.Spaceships.*;
+import grapheffect_ia.Model.Spaceships.SpaceshipFactory;
 
 /**
- * Module in charge of the memory of our AI
+ * <p>Module in charge of the memory of our AI</p>
  * @author Matthieu
  */
 public class Module_Memory extends Module  {
@@ -34,6 +34,10 @@ public class Module_Memory extends Module  {
        _numCurrentSpaceship = 0;
     }
     
+    /**
+     * Return number of spaceships on the map
+     * @return int Number of spaceships on the map
+     */
     public int countOfAllSpaceships() {
     	int countOfAllSpaceships = 0;
     	HashMap<TypeSpaceship, Integer> hashmap = getSpaceshipsNumber();
@@ -51,6 +55,10 @@ public class Module_Memory extends Module  {
 		return _spaceships;
 	}
     
+    /**
+     * <p>Calculates the number of each spaceship on the map, then store each value into an HashMap with the corresponding spaceship type.</p>
+     * @return HashMap of {@linkplain grapheffect_ia.Model.Spaceships.TypeSpaceship}, Integer
+     */
     public HashMap<TypeSpaceship, Integer> getSpaceshipsNumber() {
     	HashMap<TypeSpaceship, Integer> num = new HashMap<>();
     	int numberOfConstructors = 0;
@@ -123,17 +131,27 @@ public class Module_Memory extends Module  {
     	return _spaceships.get(_numCurrentSpaceship);
     }
     
+    /**
+     * 
+     */
     public void nextSpaceship() {
     	_numCurrentSpaceship++;
 		_numCurrentSpaceship = _numCurrentSpaceship%_spaceships.size();
     }
     
     /**
-     * Setter for _space_ships
-     * @param name name of the ship
+     * <p>Add the spaceship specified by the method parameter to the {@link java.util.ArrayList} attribute</p>
+     * <p>Type names :
+     * 	<ul><li>Explorer</li></ul>
+     * 	<ul><li>Constructor</li></ul>
+     * 	<ul><li>Fighter</li></ul>
+     * 	<ul><li>Transporter</li></ul>
+     * </p>
+     * <p>Print in the console if no case matches the type parameter</p>
+     * @param type (String) type of the ship to add
      */
-    public void addSpaceships(String name) {
-    	switch(name) {
+    public void addSpaceships(String type) {
+    	switch(type) {
     	case "Explorer" :
 			this._spaceships.add(SpaceshipFactory.createSpaceship(TypeSpaceship.EXPLORER, this._coordinateBase, _map, this));
     		break;
@@ -147,7 +165,7 @@ public class Module_Memory extends Module  {
     		this._spaceships.add(SpaceshipFactory.createSpaceship(TypeSpaceship.TRANSPORTER, this._coordinateBase, _map, this));
     		break;
     	default :
-    		System.err.println("default case on Module_Memory.addSpaceShip ("+name+")");
+    		System.err.println("default case on Module_Memory.addSpaceShip ("+type+")");
     	}
     }
       

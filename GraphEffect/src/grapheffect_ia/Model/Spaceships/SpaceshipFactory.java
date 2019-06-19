@@ -15,16 +15,16 @@ public class SpaceshipFactory {
 
 	/**
 	 * Constructs a spaceship of a specified type (arg), its place of creation coordinates and its name (used by the communication protocol).
-	 * @param arg Type of spaceship to create (@see TypeSpaceShip)
-	 * @param base Where the ship has been created
+	 * @param type Type of spaceship to create (@see TypeSpaceShip)
+	 * @param base Where the ship will be created
 	 * @param map Map for the spaceship
-	 * @param memoryModule Module_Memory
-	 * @return SpaceShip The spaceship created
-	 * @throws NullPointerException if the arg value does'n match any TypeSpaceship values
+	 * @param memoryModule {@link grapheffect_ia.Modules.Module_Memory}
+	 * @return SpaceShip The spaceship created by the factory
+	 * @throws NullPointerException if the type value does'n match any {@link grapheffect_ia.Model.Spaceships.TypeSpaceship}
 	 */
-	public static Spaceship createSpaceship(TypeSpaceship arg, Coordinate base, Map map, Module_Memory memoryModule) throws NullPointerException {
+	public static Spaceship createSpaceship(TypeSpaceship type, Coordinate base, Map map, Module_Memory memoryModule) throws NullPointerException {
 		Spaceship spaceship = null;
-		switch(arg) {
+		switch(type) {
 		case EXPLORER :
 			spaceship = new ExplorerSpaceship(base, TypeSpaceship.EXPLORER.label, memoryModule);
 			break;
