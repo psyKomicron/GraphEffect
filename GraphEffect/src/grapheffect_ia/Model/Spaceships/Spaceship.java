@@ -26,7 +26,12 @@ public abstract class Spaceship {
 	
 	private int _ap;
 	private int _number;
-	private boolean _active;	
+	private boolean _active;
+	
+	private int _exploCoeff;
+	private int _buildCoeff;
+	private int _fightCoeff;
+	private int _transportCoeff;
 	
 	/**
 	 * Constructs a spaceship with its position and name 	
@@ -35,13 +40,28 @@ public abstract class Spaceship {
 	 * @param memoryModule no description to make here
 	 * @param ap number of action points of the spaceship. Specified internally by each subclass constructor
 	 */
-	public Spaceship(Coordinate position, String name, Module_Memory memoryModule, int ap) {
+	protected Spaceship(Coordinate position, String name, Module_Memory memoryModule, int ap) {
 		_position = position;
 		_orders = new ArrayList<>();
 		_ap = ap;
 		_name = name;
 		_memoryModule = memoryModule;
 		_active = true;
+	}
+	
+	protected Spaceship(Coordinate position, String name, Module_Memory memoryModule, 
+			int ap, int explo, int build, int fight, int transport) {
+		_position = position;
+		_orders = new ArrayList<>();
+		_ap = ap;
+		_name = name;
+		_memoryModule = memoryModule;
+		_active = true;
+		// coefficients
+		_exploCoeff = explo;
+		_buildCoeff = build;
+		_fightCoeff = fight;
+		_transportCoeff = transport;
 	}
 	
 	/**
@@ -140,6 +160,22 @@ public abstract class Spaceship {
 	public boolean isActive() {
 		return _active;
 	}
+	
+	public int getExploCoeff() {
+		return this._buildCoeff;
+	}
+	
+	public int getBuildCoeff() {
+		return this._buildCoeff;
+	}
+	
+	public int getTransportCoeff() {
+		return this._transportCoeff;
+	}
+	
+	public int getFightCoeff() {
+		return this._fightCoeff;
+	}
 
 
 //********************************************************
@@ -211,11 +247,11 @@ public abstract class Spaceship {
 	}
 	
 	
-//********************************************************
-// 
-//					Abstract methods
-//
-//********************************************************
+/*********************************************************
+*
+*					Abstract methods
+*
+/*********************************************************
 	
 	/**
 	 * Return the type of this spaceship
@@ -233,5 +269,10 @@ public abstract class Spaceship {
 	 * @return number of instances of the spaceship's type
 	 */
 	public abstract int getCount();
+	
+	/**
+	 * 
+	 */
+	public abstract void behaviourEvolution();
 	
 }

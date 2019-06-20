@@ -12,15 +12,16 @@ import grapheffect_ia.Modules.Module_Memory;
  */
 public class ExplorerSpaceship extends Spaceship {
 	private static int _explorerCount;
+	// final fields
 
 	public ExplorerSpaceship(Coordinate position, String name, Module_Memory memoryModule) {
-		super(position, name, memoryModule, 6);
+		super(position, name, memoryModule, 6, 10, 0, 0, 0);
 		_explorerCount++;
 	}
 
 	
 	/**
-	 * @see Spaceship
+	 * {@inheritDoc}
 	 */
 	@Override
 	public TypeSpaceship getType() {
@@ -29,7 +30,7 @@ public class ExplorerSpaceship extends Spaceship {
 
 	
 	/**
-	 * @see Spaceship
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void resetAp() {
@@ -40,6 +41,13 @@ public class ExplorerSpaceship extends Spaceship {
 	@Override
 	public int getCount() {
 		return _explorerCount;
+	}
+
+
+	@Override
+	public void behaviourEvolution() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

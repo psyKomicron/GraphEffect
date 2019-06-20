@@ -16,12 +16,13 @@ import grapheffect_ia.Model.Map.*;
  */
 public class BfSearch {
 
-    private HashMap<Hexagon, Integer> _distances = new HashMap<>();
+    private HashMap<Hexagon, Integer> _distances;
     //private Map _map;
 
     	
     public BfSearch(Map map) {
         //this._map = map;
+    	_distances = new HashMap<>();
     }
 
     /**

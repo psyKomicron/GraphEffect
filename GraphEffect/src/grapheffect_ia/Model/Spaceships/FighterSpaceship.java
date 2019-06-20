@@ -41,4 +41,11 @@ public class FighterSpaceship extends Spaceship {
 	public int getCount() {
 		return _fighter_count;
 	}
+
+
+	@Override
+	public void behaviourEvolution() {
+		// TODO Auto-generated method stub
+		
+	}
 }

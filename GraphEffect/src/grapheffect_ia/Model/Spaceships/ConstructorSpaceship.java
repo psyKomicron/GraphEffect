@@ -44,4 +44,11 @@ public class ConstructorSpaceship extends Spaceship {
 		return _constructor_count;
 	}
 
+
+	@Override
+	public void behaviourEvolution() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

@@ -43,4 +43,11 @@ public class TransporterSpaceship extends Spaceship{
 		return _transporter_count;
 	}
 
+
+	@Override
+	public void behaviourEvolution() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
