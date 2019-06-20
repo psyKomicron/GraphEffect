@@ -251,7 +251,7 @@ public abstract class Spaceship {
 *
 *					Abstract methods
 *
-/*********************************************************
+*********************************************************/
 	
 	/**
 	 * Return the type of this spaceship
