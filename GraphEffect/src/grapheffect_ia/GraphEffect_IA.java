@@ -30,6 +30,9 @@ public class GraphEffect_IA {
         	System.err.println("Server unexpectedly shuted down/application just crashed");
         	npe.printStackTrace();
         }
+        finally {
+        	System.err.println("\t\tsunny out");
+        }
     }
     
 }

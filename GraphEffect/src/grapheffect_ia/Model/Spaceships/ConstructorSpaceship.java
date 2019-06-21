@@ -45,9 +45,11 @@ public class ConstructorSpaceship extends Spaceship {
 	}
 
 
+	/**
+	 * need to define the behavior of a constructor, and then it's evolution
+	 */
 	@Override
 	public void behaviourEvolution() {
-		// TODO Auto-generated method stub
 		
 	}
 

@@ -10,29 +10,27 @@ import grapheffect_ia.Model.Map.Map;
 import grapheffect_ia.Model.Map.TypeMovement;
 import grapheffect_ia.Model.Map.Hexagon.Hexagon;
 import grapheffect_ia.Model.Map.Hexagon.TypeHexagon;
+import grapheffect_ia.Model.Spaceships.Coefficient.AffinityCoeff;
 import grapheffect_ia.Modules.Module_Memory;
 
 /**
  * @author julie
  */
 public abstract class Spaceship {
+	// class types
 	private Coordinate _position;
 	private Coordinate _goalPosition;
 	private Module_Memory _memoryModule;
 	private Map _map;
 	private String _name;
-	
+	AffinityCoeff _coeffs;
+	// collections types
 	private ArrayList<TypeMovement> _orders;
-	
+	// primitives types
 	private int _ap;
 	private int _number;
 	private boolean _active;
-	
-	private int _exploCoeff;
-	private int _buildCoeff;
-	private int _fightCoeff;
-	private int _transportCoeff;
-	
+
 	/**
 	 * Constructs a spaceship with its position and name 	
 	 * @param position position where the spaceship has been built
@@ -48,7 +46,19 @@ public abstract class Spaceship {
 		_memoryModule = memoryModule;
 		_active = true;
 	}
-	
+
+	/**
+	 * @see Spaceship#Spaceship(Coordinate, String, Module_Memory, int)
+	 * <p>With this constructor, the coefficients are specified</p>
+	 * @param position
+	 * @param name
+	 * @param memoryModule
+	 * @param ap
+	 * @param explo exploration affinity coefficient
+	 * @param build building affinity coefficient
+	 * @param fight fighting affinity coefficient
+	 * @param transport transporting affinity coefficient
+	 */
 	protected Spaceship(Coordinate position, String name, Module_Memory memoryModule, 
 			int ap, int explo, int build, int fight, int transport) {
 		_position = position;
@@ -58,12 +68,12 @@ public abstract class Spaceship {
 		_memoryModule = memoryModule;
 		_active = true;
 		// coefficients
-		_exploCoeff = explo;
-		_buildCoeff = build;
-		_fightCoeff = fight;
-		_transportCoeff = transport;
+		_coeffs.setExploCoeff(explo);
+		_coeffs.setBuildCoeff(build);;
+		_coeffs.setFightCoeff(fight);;
+		_coeffs.setTransportCoeff(transport);
 	}
-	
+
 	/**
 	 * Constructs a spaceship with it's starting coordinates
 	 * @deprecated
@@ -76,24 +86,28 @@ public abstract class Spaceship {
 	}
 
 
-//********************************************************
-// 
-//					Getters/setters
-//
-//********************************************************
+	//********************************************************
+	// 
+	//					Getters/setters
+	//
+	//********************************************************
+
+	public Module_Memory getMemoryModule() {
+		return _memoryModule;
+	}
 	
 	public void setNumber(int n) {
 		_number = n;
 	}
-	
+
 	protected String getName() {
 		return this._name;
 	}
-	
+
 	protected void setName(String name) {
 		_name = name;
 	}
-	
+
 	/**
 	 * Gets and return the value at the specified index
 	 * @param index, index value to retrieve
@@ -102,7 +116,7 @@ public abstract class Spaceship {
 	public TypeMovement getOrder(int index) {
 		return _orders.get(index);
 	}
-	
+
 	/**
 	 * <p>Gets and return the first movement from _orders (ArrayList<Movement>)</p>
 	 * @return TypeMovement, first movement from _orders
@@ -116,7 +130,7 @@ public abstract class Spaceship {
 		}
 		return order;
 	}
-		
+
 	/**
 	 * _position getter
 	 * @return Coordinate, value of _position attribute
@@ -124,7 +138,7 @@ public abstract class Spaceship {
 	public Coordinate getPosition() {
 		return this._position;
 	}
-		
+
 	/**
 	 * _ap getter
 	 * @return integer, value of _ap attribute
@@ -132,7 +146,7 @@ public abstract class Spaceship {
 	public int getAp() {
 		return this._ap;
 	}
-	
+
 	/**
 	 * _ap setter. Used to reset or change the aps of a ship
 	 * @param ap, value setting _ap attribute
@@ -140,19 +154,19 @@ public abstract class Spaceship {
 	public void setAp(int ap) {
 		this._ap = ap;
 	}
-	
+
 	public void setMap(Map map) {
 		_map = map;
 	}
-	
+
 	public void setGoalPosition(Coordinate c) {
 		_goalPosition = c;
 	}
-	
+
 	public Coordinate getGoalPosition() {
 		return _goalPosition;
 	}
-	
+
 	public void setInactive() {
 		_active = false;
 	}
@@ -160,30 +174,17 @@ public abstract class Spaceship {
 	public boolean isActive() {
 		return _active;
 	}
-	
-	public int getExploCoeff() {
-		return this._buildCoeff;
-	}
-	
-	public int getBuildCoeff() {
-		return this._buildCoeff;
-	}
-	
-	public int getTransportCoeff() {
-		return this._transportCoeff;
-	}
-	
-	public int getFightCoeff() {
-		return this._fightCoeff;
+
+	public AffinityCoeff getCoeffs() {
+		return _coeffs;
 	}
 
+	//********************************************************
+	// 
+	//						Instance method
+	//
+	//********************************************************
 
-//********************************************************
-// 
-//						Instance method
-//
-//********************************************************
-	
 	/**
 	 * Add each movement from variable (list) to the _order attribute (which is an array)
 	 * @param list, array of each type movement for the ship to do
@@ -205,11 +206,11 @@ public abstract class Spaceship {
 		}
 		_ap -= 1;
 	}
-	
+
 	public void clearOrders() {
 		_orders.clear();
 	}
-	
+
 	/**
 	 * <p>Uses the static attribute of the spaceship and its type (name) to make a string like :</p>
 	 * <p>Explorer_1</p>
@@ -218,7 +219,7 @@ public abstract class Spaceship {
 	public String generateName() {
 		return getName()+"_"+_number;
 	}
-	
+
 	public boolean needUpdatedMap() throws NullPointerException {
 		boolean needUpdatedMap = false;
 		if(_map == null) {
@@ -233,7 +234,7 @@ public abstract class Spaceship {
 		}
 		return needUpdatedMap;
 	}
-	
+
 	/**
 	 * Check if where the spaceship is headed is free
 	 * @return boolean
@@ -245,20 +246,20 @@ public abstract class Spaceship {
 		} else canDoOrder = false;
 		return canDoOrder;
 	}
-	
-	
-/*********************************************************
-*
-*					Abstract methods
-*
-*********************************************************/
-	
+
+
+	/*********************************************************
+	 *
+	 *					Abstract methods
+	 *
+	 *********************************************************/
+
 	/**
 	 * Return the type of this spaceship
 	 * @return TypeSpaceShip, type of the spaceship (see {@link grapheffect_ia.Model.Spaceships.TypeSpaceship})
 	 */
 	public abstract TypeSpaceship getType();
-	
+
 	/**
 	 * Reset the AP of this ship (Action Points)
 	 */
@@ -269,10 +270,15 @@ public abstract class Spaceship {
 	 * @return number of instances of the spaceship's type
 	 */
 	public abstract int getCount();
-	
+
 	/**
-	 * 
+	 * <p>Depending on several variables the behavior of the ship will change, e.g. if the map has been 
+	 * explored over 50% then the explorer is less useful.</p>
+	 * <p>According to that this method will change the utility coefficients of the spaceship, meaning it 
+	 * will change the value of the _coeff[...] of the spaceship class on a scale from 0 (no use) up to 10 (max value, really useful)</p>
+	 * <p>Even if the some value can change, some will not such as the _buildCoeff on an explorer which will always 
+	 * stays at 0 for obvious reasons</p>
 	 */
 	public abstract void behaviourEvolution();
-	
+
 }

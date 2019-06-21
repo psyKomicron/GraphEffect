@@ -35,12 +35,12 @@ public class ManageSpaceshipsState extends State {
 		getMemoryModule().nextSpaceship();
 		State newState = new EndTurnState(getAi());
 		int sumAp = 0;
-		for(Spaceship s : getMemoryModule().getSpaceships()) {
+		for (Spaceship s : getMemoryModule().getSpaceships()) {
 			if(_spaceship.isActive()) {
 				sumAp += s.getAp();
 			}
 		}
-		if(sumAp > 0) {
+		if (sumAp > 0) {
 			while(this.getMemoryModule().getCurrentSpaceship().getAp() == 0 || !(getMemoryModule().getCurrentSpaceship().isActive())) {
 				this.getMemoryModule().nextSpaceship();
 			}
