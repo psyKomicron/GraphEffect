@@ -17,7 +17,6 @@ public class TransporterSpaceship extends Spaceship{
 		super(position, name, memoryModule, -1);
 		_transporter_count++;
 	}
-
 	
 	/**
 	 * @see Spaceship
@@ -26,7 +25,6 @@ public class TransporterSpaceship extends Spaceship{
 	public TypeSpaceship getType() {
 		return TypeSpaceship.TRANSPORTER;
 	}
-
 	
 	/**
 	 * @see Spaceship
@@ -37,17 +35,16 @@ public class TransporterSpaceship extends Spaceship{
 		throw new UnsupportedOperationException();
 	}
 
-
 	@Override
 	public int getCount() {
 		return _transporter_count;
 	}
 
-
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
-	public void behaviourEvolution() {
-		// TODO Auto-generated method stub
-		
+	public void behaviorEvolution() {
 	}
 
 }

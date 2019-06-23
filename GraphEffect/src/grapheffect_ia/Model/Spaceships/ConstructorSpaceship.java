@@ -14,7 +14,7 @@ public class ConstructorSpaceship extends Spaceship {
 	private static int _constructor_count;
 
 	public ConstructorSpaceship(Coordinate position, String name, Module_Memory memoryModule) {
-		super(position, name, memoryModule, 3);
+		super(position, name, memoryModule, 3, 0, 10, 0, 0);
 		_constructor_count++;
 	}
 
@@ -35,7 +35,6 @@ public class ConstructorSpaceship extends Spaceship {
 		setAp(3);
 	}
 
-
 	/**
 	 * {@inheritDoc}
 	 */
@@ -44,13 +43,11 @@ public class ConstructorSpaceship extends Spaceship {
 		return _constructor_count;
 	}
 
-
 	/**
+	 * {@inheritDoc}
 	 * need to define the behavior of a constructor, and then it's evolution
 	 */
-	@Override
 	public void behaviourEvolution() {
-		
 	}
 
 }

@@ -42,10 +42,10 @@ public class FighterSpaceship extends Spaceship {
 		return _fighter_count;
 	}
 
-
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
-	public void behaviourEvolution() {
-		// TODO Auto-generated method stub
-		
+	public void behaviorEvolution() {
 	}
 }

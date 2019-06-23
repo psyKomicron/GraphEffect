@@ -17,6 +17,7 @@ import grapheffect_ia.Model.Spaceships.SpaceshipFactory;
 public class Module_Memory extends Module  {
 
 	private ArrayList<Spaceship> _spaceships;
+	private ArrayList<Coordinate> _bases;
     private Coordinate _coordinateBase;
     private Map _map;
     private boolean _mapUpToDate;
@@ -31,6 +32,7 @@ public class Module_Memory extends Module  {
     public Module_Memory(AI ai) {
         super(ai);
         _spaceships = new ArrayList<>();
+        _bases = new ArrayList<>();
        _numCurrentSpaceship = 0;
     }
     
