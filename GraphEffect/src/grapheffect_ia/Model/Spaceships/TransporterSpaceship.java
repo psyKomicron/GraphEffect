@@ -45,6 +45,7 @@ public class TransporterSpaceship extends Spaceship{
 	 */
 	@Override
 	public void behaviorEvolution() {
+		throw new UnsupportedOperationException();
 	}
 
 }

@@ -47,7 +47,8 @@ public class ConstructorSpaceship extends Spaceship {
 	 * {@inheritDoc}
 	 * need to define the behavior of a constructor, and then it's evolution
 	 */
-	public void behaviourEvolution() {
+	public void behaviorEvolution() {
+		
 	}
 
 }

@@ -13,6 +13,10 @@ import grapheffect_ia.Modules.Module_Memory;
 public class FighterSpaceship extends Spaceship {
 	private static int _fighter_count;
 
+	/**
+	 * @deprecated
+	 * {@inheritDoc}
+	 */
 	public FighterSpaceship(Coordinate position, String name, Module_Memory memoryModule) {
 		super(position, name, memoryModule, -1);
 		_fighter_count++;
@@ -20,7 +24,7 @@ public class FighterSpaceship extends Spaceship {
 
 	
 	/**
-	 * @see Spaceship
+	 * {@inheritDoc}
 	 */
 	@Override
 	public TypeSpaceship getType() {
@@ -29,7 +33,7 @@ public class FighterSpaceship extends Spaceship {
 
 	
 	/**
-	 * @see Spaceship
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void resetAp() {
@@ -37,6 +41,9 @@ public class FighterSpaceship extends Spaceship {
 	}
 
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int getCount() {
 		return _fighter_count;

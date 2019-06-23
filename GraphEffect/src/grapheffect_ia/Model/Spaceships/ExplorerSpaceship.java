@@ -54,19 +54,19 @@ public class ExplorerSpaceship extends Spaceship {
 	 * 	 <li>if percent superior to 0.25 and superior to 0.75 : coeff = 10</li>
 	 * </ul>
 	 */
-
-	public void behaviourEvolution() {
+	@Override
+	public void behaviorEvolution() {
 		AffinityCoeff coeff = getCoeffs();
 		float percent = this.getMemoryModule().getMap().getPercentExploredFloat();
 		if (percent > 0.25) {
 			if (percent > 0.50) {
 				if (percent < 0.75) 
-					coeff.setExploCoeff(10);
+					coeff.setExploreCoeff(10);
 				else
-					coeff.setExploCoeff(7);
+					coeff.setExploreCoeff(7);
 			}
 			else {
-				coeff.setExploCoeff(5);
+				coeff.setExploreCoeff(5);
 			}
 		}
 	}

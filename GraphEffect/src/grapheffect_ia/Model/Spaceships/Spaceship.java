@@ -23,7 +23,7 @@ public abstract class Spaceship {
 	private Module_Memory _memoryModule;
 	private Map _map;
 	private String _name;
-	AffinityCoeff _coeffs;
+	private AffinityCoeff _coeffs;
 	// collections types
 	private ArrayList<TypeMovement> _orders;
 	// primitives types
@@ -59,17 +59,6 @@ public abstract class Spaceship {
 	 * @param fight fighting affinity coefficient
 	 * @param transport transporting affinity coefficient
 	 */
-	/**
-	 * Propensity are on scale from 0 to 10
-	 * @param position position where the spaceship has been built
-	 * @param name name of the spaceship
-	 * @param memoryModule no description to make here
-	 * @param ap number of action points of the spaceship. Specified internally by each subclass constructor
-	 * @param explo propensity of the ship to explore
-	 * @param build propensity of the ship to build
-	 * @param fight propensity of the ship to fight
-	 * @param transport propensity of the ship to transport things
-	 */
 	protected Spaceship(Coordinate position, String name, Module_Memory memoryModule, 
 			int ap, int explo, int build, int fight, int transport) {
 		_position = position;
@@ -79,7 +68,7 @@ public abstract class Spaceship {
 		_memoryModule = memoryModule;
 		_active = true;
 		// coefficients
-		_coeffs.setExploCoeff(explo);
+		_coeffs.setExploreCoeff(explo);
 		_coeffs.setBuildCoeff(build);;
 		_coeffs.setFightCoeff(fight);;
 		_coeffs.setTransportCoeff(transport);
@@ -95,7 +84,6 @@ public abstract class Spaceship {
 		_orders = new ArrayList<>();
 		_ap = 6;
 	}
-
 
 	//********************************************************
 	// 
@@ -185,23 +173,9 @@ public abstract class Spaceship {
 	public boolean isActive() {
 		return _active;
 	}
-<<<<<<< .mine
-	
-	public int getExploCoeff() {
-		return this._exploCoeff;
-||||||| .r82
-	
-	public int getExploCoeff() {
-		return this._buildCoeff;
-=======
 
 	public AffinityCoeff getCoeffs() {
 		return _coeffs;
->>>>>>> .r84
-	}
-	
-	protected Module_Memory getMemoryModule() {
-		return this._memoryModule;
 	}
 
 	//********************************************************
@@ -297,20 +271,13 @@ public abstract class Spaceship {
 	public abstract int getCount();
 
 	/**
-<<<<<<< .mine
-	 * <p>Changes behavior of the spaceship, depending on numerous factors : 
-	 * <ul><li>Type of the ship</li><li>Number of bases built</li><li>...</li></ul>
-||||||| .r82
-	 * 
-=======
 	 * <p>Depending on several variables the behavior of the ship will change, e.g. if the map has been 
 	 * explored over 50% then the explorer is less useful.</p>
 	 * <p>According to that this method will change the utility coefficients of the spaceship, meaning it 
 	 * will change the value of the _coeff[...] of the spaceship class on a scale from 0 (no use) up to 10 (max value, really useful)</p>
 	 * <p>Even if the some value can change, some will not such as the _buildCoeff on an explorer which will always 
 	 * stays at 0 for obvious reasons</p>
->>>>>>> .r84
 	 */
 	public abstract void behaviorEvolution();
-
+	
 }
