@@ -28,7 +28,7 @@ public class NeedSpaceshipState extends State {
 	public State transition() {
 		State transition = null;
 		TypeSpaceship type = null;
-		if(getMemoryModule().countOfAllSpaceships() <= 2 && getMemoryModule().isCoordinateFree(getMemoryModule().getBase())) {
+		if(getMemoryModule().getData().countOfAllSpaceships() <= 2 && getMemoryModule().isCoordinateFree(getMemoryModule().getBase())) {
 			if (getMemoryModule().getSpaceshipsNumber(TypeSpaceship.EXPLORER) <	 2) {
 				type = TypeSpaceship.EXPLORER;
 			}

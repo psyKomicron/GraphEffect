@@ -10,7 +10,6 @@ import grapheffect_ia.Model.Map.Map;
 import grapheffect_ia.Model.Map.TypeMovement;
 import grapheffect_ia.Model.Map.Hexagon.Hexagon;
 import grapheffect_ia.Model.Map.Hexagon.TypeHexagon;
-import grapheffect_ia.Model.Spaceships.Coefficient.AffinityCoeff;
 import grapheffect_ia.Modules.Module_Memory;
 
 /**
@@ -279,5 +278,64 @@ public abstract class Spaceship {
 	 * stays at 0 for obvious reasons</p>
 	 */
 	public abstract void behaviorEvolution();
+
 	
-}
+	/*********************************************************
+	 *
+	 *					Internal classes
+	 *
+	 *********************************************************/
+
+	class AffinityCoeff {
+		private int _buildCoeff;
+		private int _fightCoeff;
+		private int _transportCoeff;
+		private int _exploreCoeff;
+		
+		public AffinityCoeff(int build, int fight, int transport, int explore) {
+			_buildCoeff = build;
+			_fightCoeff = fight;
+			_transportCoeff = transport;
+			_exploreCoeff = explore;
+		}
+		
+		/********************************************************
+		 * 
+		 * 					GETTERS/SETTERS
+		 * 
+		 ********************************************************/
+		
+		public int getBuildCoeff() {
+			return _buildCoeff;
+		}
+
+		public void setBuildCoeff(int _buildCoeff) {
+			this._buildCoeff = _buildCoeff;
+		}
+
+		public int getFightCoeff() {
+			return _fightCoeff;
+		}
+
+		public void setFightCoeff(int _fightCoeff) {
+			this._fightCoeff = _fightCoeff;
+		}
+
+		public int getTransportCoeff() {
+			return _transportCoeff;
+		}
+
+		public void setTransportCoeff(int _transportCoeff) {
+			this._transportCoeff = _transportCoeff;
+		}
+
+		public int getExploreCoeff() {
+			return _exploreCoeff;
+		}
+
+		public void setExploreCoeff(int _exploreCoeff) {
+			this._exploreCoeff = _exploreCoeff;
+		}
+	}
+	
+} //class end

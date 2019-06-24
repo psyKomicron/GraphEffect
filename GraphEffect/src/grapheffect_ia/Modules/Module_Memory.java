@@ -9,6 +9,7 @@ import grapheffect_ia.Model.Map.Coordinate;
 import grapheffect_ia.Model.Map.Hexagon.Hexagon;
 import grapheffect_ia.Model.Spaceships.*;
 import grapheffect_ia.Model.Spaceships.SpaceshipFactory;
+import grapheffect_ia.Modules.Data.Data;
 
 /**
  * <p>Module in charge of the memory of our AI</p>
@@ -16,8 +17,7 @@ import grapheffect_ia.Model.Spaceships.SpaceshipFactory;
  */
 public class Module_Memory extends Module  {
 
-	private ArrayList<Spaceship> _spaceships;
-	private ArrayList<Coordinate> _bases;
+	private Data _data;
     private Coordinate _coordinateBase;
     private Map _map;
     private boolean _mapUpToDate;
@@ -31,22 +31,20 @@ public class Module_Memory extends Module  {
      */
     public Module_Memory(AI ai) {
         super(ai);
-        _spaceships = new ArrayList<>();
-        _bases = new ArrayList<>();
+        _data = new Data();
+        _data.setSpaceships(new ArrayList<Spaceship>());
+        _data.setBases(new ArrayList<Coordinate>());
        _numCurrentSpaceship = 0;
     }
+
+	/*********************************************************
+	 * 
+	 * 						GETTERS/SETTERS
+	 * 
+	 *********************************************************/
     
-    /**
-     * Return number of spaceships on the map
-     * @return int Number of spaceships on the map
-     */
-    public int countOfAllSpaceships() {
-    	int countOfAllSpaceships = 0;
-    	HashMap<TypeSpaceship, Integer> hashmap = getSpaceshipsNumber();
-    	for(Integer i : hashmap.values()) {
-    		countOfAllSpaceships += i; 
-    	}
-    	return countOfAllSpaceships;
+    public Data getData() {
+    	return _data;
     }
     
     /**
@@ -54,39 +52,8 @@ public class Module_Memory extends Module  {
      * @return Array list _spaceship
      */
     public ArrayList<Spaceship> getSpaceships() {
-		return _spaceships;
+		return _data.getSpaceships();
 	}
-    
-    /**
-     * <p>Calculates the number of each spaceship on the map, then store each value into an HashMap with the corresponding spaceship type.</p>
-     * @return HashMap of {@linkplain grapheffect_ia.Model.Spaceships.TypeSpaceship}, Integer
-     */
-    public HashMap<TypeSpaceship, Integer> getSpaceshipsNumber() {
-    	HashMap<TypeSpaceship, Integer> num = new HashMap<>();
-    	int numberOfConstructors = 0;
-    	int numberOfExplorers = 0;
-    	int numberOfFighters = 0;
-    	int numberOfTransporters = 0;
-    	for (Spaceship s : _spaceships) {
-    		if (s.getType().equals(TypeSpaceship.CONSTRUCTOR)) {
-    			numberOfConstructors++;
-    		}
-    		if (s.getType().equals(TypeSpaceship.EXPLORER)) {
-    			numberOfExplorers++;
-    		}
-    		if (s.getType().equals(TypeSpaceship.FIGHTER)) {
-    			numberOfFighters++;
-    		}
-    		if (s.getType().equals(TypeSpaceship.TRANSPORTER)) {
-    			numberOfTransporters++;
-    		}
-    	}
-    	num.put(TypeSpaceship.CONSTRUCTOR, numberOfConstructors);
-    	num.put(TypeSpaceship.EXPLORER, numberOfExplorers);
-    	num.put(TypeSpaceship.FIGHTER, numberOfFighters);
-    	num.put(TypeSpaceship.TRANSPORTER, numberOfTransporters);
-    	return num;
-    }
     
     /**
      * Return the number of spaceship of the given type
@@ -95,7 +62,7 @@ public class Module_Memory extends Module  {
      */
     public int getSpaceshipsNumber(TypeSpaceship type) {
     	int i = 0;
-    	for(Spaceship ship : _spaceships) {
+    	for(Spaceship ship : _data.getSpaceships()) {
     		if(ship.getType().equals(type)) {
     			i++;
     		}
@@ -112,9 +79,7 @@ public class Module_Memory extends Module  {
     }
     
     /**
-     * <p>
-     * Uses the fromString {@link grapheffect_ia.Modules.Module_Memory#fromString(String message)} static method to set the base for the game.
-     * </p> 
+     * <p>Uses the fromString {@link grapheffect_ia.Modules.Module_Memory#fromString(String message)} static method to set the base for the game.</p> 
      * @param message String sent by the server when asked for BASE command
      */
     public void setBase(String message) {
@@ -130,15 +95,33 @@ public class Module_Memory extends Module  {
     }
     
     public Spaceship getCurrentSpaceship() {
-    	return _spaceships.get(_numCurrentSpaceship);
+    	return _data.getSpaceships().get(_numCurrentSpaceship);
     }
+    
+    /**
+     * <p>
+     * Check if the memory module has stored the map of the game.
+     * If not the function raise a NullPointerException which is caught by the method thus returns false.
+     * Else if the module has a map then the method returns true
+     * </p>
+     * @return boolean
+     */
+    public boolean hasMap() {
+    	return this._mapUpToDate;
+    }
+    
+	/*********************************************************
+	 * 
+	 * 						INSTANCE METHODS
+	 * 
+	 *********************************************************/
     
     /**
      * 
      */
     public void nextSpaceship() {
     	_numCurrentSpaceship++;
-		_numCurrentSpaceship = _numCurrentSpaceship%_spaceships.size();
+		_numCurrentSpaceship = _numCurrentSpaceship%_data.getSpaceships().size();
     }
     
     /**
@@ -155,16 +138,16 @@ public class Module_Memory extends Module  {
     public void addSpaceships(String type) {
     	switch(type) {
     	case "Explorer" :
-			this._spaceships.add(SpaceshipFactory.createSpaceship(TypeSpaceship.EXPLORER, this._coordinateBase, _map, this));
+			this._data.getSpaceships().add(SpaceshipFactory.createSpaceship(TypeSpaceship.EXPLORER, this._coordinateBase, _map, this));
     		break;
     	case "Constructor" :
-    		this._spaceships.add(SpaceshipFactory.createSpaceship(TypeSpaceship.CONSTRUCTOR, this._coordinateBase, _map, this));
+    		this._data.getSpaceships().add(SpaceshipFactory.createSpaceship(TypeSpaceship.CONSTRUCTOR, this._coordinateBase, _map, this));
     		break;
     	case "Fighter" :
-    		this._spaceships.add(SpaceshipFactory.createSpaceship(TypeSpaceship.FIGHTER, this._coordinateBase, _map, this));
+    		this._data.getSpaceships().add(SpaceshipFactory.createSpaceship(TypeSpaceship.FIGHTER, this._coordinateBase, _map, this));
     		break;
     	case "Transporter" :
-    		this._spaceships.add(SpaceshipFactory.createSpaceship(TypeSpaceship.TRANSPORTER, this._coordinateBase, _map, this));
+    		this._data.getSpaceships().add(SpaceshipFactory.createSpaceship(TypeSpaceship.TRANSPORTER, this._coordinateBase, _map, this));
     		break;
     	default :
     		System.err.println("default case on Module_Memory.addSpaceShip ("+type+")");
@@ -181,27 +164,15 @@ public class Module_Memory extends Module  {
     public void generateMap(String messageReceived) {
     	_map = new Map(messageReceived);
         _mapUpToDate = true;
-        for(Spaceship spaceship : _spaceships) {
+        for(Spaceship spaceship : _data.getSpaceships()) {
         	spaceship.setMap(_map);
         }
-    }
-    
-    /**
-     * <p>
-     * Check if the memory module has stored the map of the game.
-     * If not the function raise a NullPointerException which is caught by the method thus returns false.
-     * Else if the module has a map then the method returns true
-     * </p>
-     * @return boolean
-     */
-    public boolean hasMap() {
-    	return this._mapUpToDate;
     }
     
     public void updateMap(boolean upToDate) {
     	_mapUpToDate = upToDate;
     	if(upToDate == false) {
-			for(Spaceship spaceship : _spaceships) {
+			for(Spaceship spaceship : _data.getSpaceships()) {
 				spaceship.clearOrders();
 			}
     	}
@@ -234,7 +205,7 @@ public class Module_Memory extends Module  {
     
     public boolean isCoordinateFree(Coordinate c) {
     	boolean isFree = true;
-    	for(Spaceship spaceship : _spaceships) {
+    	for(Spaceship spaceship : _data.getSpaceships()) {
     		if(spaceship.getPosition().equals(c)) {
     			isFree = false;
     		}

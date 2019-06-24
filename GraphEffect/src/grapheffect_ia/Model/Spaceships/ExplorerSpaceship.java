@@ -4,7 +4,6 @@
 package grapheffect_ia.Model.Spaceships;
 
 import grapheffect_ia.Model.Map.Coordinate;
-import grapheffect_ia.Model.Spaceships.Coefficient.AffinityCoeff;
 import grapheffect_ia.Modules.Module_Memory;
 
 /**
