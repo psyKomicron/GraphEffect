@@ -1,5 +1,5 @@
 # GraphEffect
-## AI to play a great game, made by a **simple math teacher**. (last revision : 14:10 19/06/2019)
+## AI. (last revision : 14:10 19/06/2019)
 
 note on files :
 * server_connection.bat :
